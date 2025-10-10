@@ -80,7 +80,7 @@ export function Fonctionnalités() {
   const [activeRole, setActiveRole] = useState(roles[0]);
 
   return (
-    <section className="py-20 bg-gradient-to-t from-white to-orange-50" id="roles">
+    <section className="py-20 bg-gradient-to-t from-white to-orange-50" id="fonctionnalites">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center">
         <h2 className="text-4xl font-bold text-neutral-800 mb-4">Fonctionnalités Clés</h2>
         <p className="text-gray-600 mb-12 lg:block hidden">Découvrez les fonctionnalités selon votre rôle dans l’établissement</p>

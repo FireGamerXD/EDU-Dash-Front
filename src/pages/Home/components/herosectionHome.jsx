@@ -31,21 +31,28 @@ export function HerosecHome() {
         Une solution unique pour une école plus connectée.
       </p>
       
+ 
+       <div className="flex flex-col sm:flex-row gap-4 pt-4">
+        <a href="/login">
+          <button className="px-8 py-4 md:px-6 md:py-3 rounded-xl bg-[#FFAA27] text-white font-medium hover:bg-primary-dark/90 transition-all shadow-lg hover:shadow-xl transition-all duration-300 hover:shadow-orange-200 flex items-center justify-center">
+            Se Connecter
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293z" clipRule="evenodd" />
+            </svg>
+          </button>
+        </a>
 
-      <div className="flex flex-col sm:flex-row gap-4 pt-4">
-        <button className="px-8 py-4 md:px-6 md:py-3 rounded-xl bg-[#FFAA27] text-white font-medium hover:bg-primary-dark/90 transition-all shadow-lg hover:shadow-xl transition-all duration-300 hover:shadow-orange-200 flex items-center justify-center">
-          <a href="/login">Se Connecter</a>
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293z" clipRule="evenodd" />
-          </svg>
-        </button>
 
-        <button className="px-8 py-4 md:px-6 md:py-3 rounded-xl border-2 border-gray-200 bg-white text-gray-700 font-medium hover:bg-gray-50 transition-all lg:flex items-center justify-center hidden">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-          </svg>
-          Voir la démo
-        </button>
+
+        <a href="/soon">
+          <button className="px-8 py-4 md:px-6 md:py-3 rounded-xl border-2 border-gray-200 bg-white text-gray-700 font-medium hover:bg-gray-50 transition-all lg:flex items-center justify-center hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+            </svg>
+            Voir la démo
+          </button>       
+        </a>
+
       </div>
     {/* Ecoles ect 500 section */}
       {/* <div className="flex items-center  space-x-4">

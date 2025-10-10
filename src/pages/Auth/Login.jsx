@@ -38,16 +38,43 @@ export const LoginPage = () => {
         className="flex flex-col md:flex-row w-full max-w-4xl rounded-3xl shadow-xl overflow-hidden border border-gray-100 bg-white/80 backdrop-blur-lg"
       >
         {/* Orange Illustration Section */}
-        <motion.div
-          data-aos="fade-right"
-          className="hidden md:flex w-1/2 bg-[#ffa500] items-center justify-center p-10 rounded-r-[4rem]"
-        >
-          <img
-            src={illustration}
-            alt="Illustration"
-            className="w-[95%] h-auto drop-shadow-lg"
-          />
-        </motion.div>
+{/* Orange Illustration Section */}
+<motion.div
+  data-aos="fade-right"
+  className="hidden md:flex w-1/2 bg-[#ffa500] items-center justify-center p-10 rounded-r-[4rem] relative"
+>
+<a
+  href="/"
+  className="absolute top-6 left-6 flex items-center gap-2 text-white font-medium hover:text-orange-100 transition-all duration-300"
+>
+  {/* Left Arrow SVG */}
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={2}
+    stroke="currentColor"
+    className="w-5 h-5"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M10 19l-7-7 7-7M3 12h18"
+    />
+  </svg>
+
+  Retour à l’accueil
+</a>
+
+
+  {/* Illustration Image */}
+  <img
+    src={illustration}
+    alt="Illustration"
+    className="w-[95%] h-auto drop-shadow-lg"
+  />
+</motion.div>
+
 
         {/* White Form Section */}
         <motion.div
