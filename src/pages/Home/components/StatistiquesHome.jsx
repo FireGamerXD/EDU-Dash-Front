@@ -74,7 +74,7 @@ export function StatistiquesHome() {
                 </div>
                 <div data-aos="fade-up"  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {[
-                        { key: 'students', end: 1600, suffix: '+', label: 'Étudiants Inscrits', icon: 'student' },
+                        { key: 'students', end: 7500, suffix: '+', label: 'Étudiants Inscrits', icon: 'student' },
                         { key: 'teachers', end: 150, suffix: '+', label: 'Enseignants', icon: 'teacher' },
                         { key: 'satisfaction', end: 98, suffix: '%', label: 'Taux de Satisfaction', icon: 'smile' },
                         { key: 'schools', end: 25, suffix: '+', label: 'Écoles Utilisatrices', icon: 'school' },

@@ -20,20 +20,21 @@ export const Footer = () => {
             <p className="text-sm text-gray-600 max-w-sm">
               Simplifiez la gestion scolaire avec un tableau de bord moderne — administration, communication et rapports en un seul endroit.
             </p>
-            <div className="flex items-center space-x-3">
-              {[FaTwitter, FaLinkedin, FaEnvelope].map((Icon, i) => (
-                <motion.a
-                  key={i}
-                  whileHover={{ scale: 1.2, rotate: [0, 10, -10, 0] }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-white shadow-md text-gray-600 hover:bg-orange-50 hover:text-orange-500 transition-all duration-300"
-                  href="#"
-                  target="_blank"
-                >
-                  <Icon className="h-5 w-5" />
-                </motion.a>
-              ))}
-            </div>
+          <div className="flex items-center space-x-3">
+            {[FaLinkedin, FaEnvelope].map((Icon, i) => (
+              <motion.a
+                key={i}
+                whileHover={{ scale: 1.2, rotate: [0, 10, -10, 0] }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-white shadow-md text-gray-600 hover:bg-orange-50 hover:text-orange-500 transition-all duration-300"
+                href="#"
+                target="_blank"
+              >
+                <Icon className="h-5 w-5" />
+              </motion.a>
+            ))}
+          </div>
+
           </div>
 
           {/* Quick Links */}
