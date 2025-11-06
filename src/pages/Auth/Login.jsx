@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../utils/imgs/logo.png";
+import logo from "../../utils/imgs/edu_dash_logo.png";
 import illustration from "../../utils/imgs/Login-amico.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
