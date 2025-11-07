@@ -85,7 +85,7 @@ export function NavBar() {
           >
             <div className="flex justify-center py-6">
               <a href="/">
-                <img src={logo} className="w-42 h-auto" alt="EduDash Logo" />
+                <img src={logo} className="w-[45vw]" alt="EduDash Logo" />
               </a>
             </div>
 
@@ -574,7 +574,7 @@ export function ContactSection() {
 
               <button type="submit" disabled={isSubmitting}
                 className="w-full flex items-center justify-center gap-2 py-3 bg-[#FFAA27] hover:bg-orange-500 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition">
-                {isSubmitting ? "Envoi..." : "Envoyer le message"}
+                {isSubmitting ? "Envoi..." : "Envoyer"}
               </button>
             </form>
 
@@ -628,7 +628,7 @@ export function Footer() {
         <div className="flex-1">
           <h3 className="text-lg font-semibold mb-4">Contactez-nous</h3>
           <ul className="space-y-2 text-sm text-gray-600">
-            <li>Email: <a href="mailto:contact@edudash.com" className="hover:text-[#FFAA27] transition-colors">contact@edudash.com</a></li>
+            <li>Email : <a href="mailto:contact@edudash.com" className="hover:text-[#FFAA27] transition-colors">contact@edudash.com</a></li>
             <li className="flex">Localisation : <p className="hover:text-[#FFAA27] transition-colors ml-2">Casablanca, Maroc</p></li>
           </ul>
 
