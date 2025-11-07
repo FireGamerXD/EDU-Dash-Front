@@ -1,12 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import logo from "../../utils/imgs/edu_dash_logo.png";
 import dark_logo from "../../utils/imgs/edu_dash_dark.png";
 import dark_logo2 from "../../utils/imgs/edu_dash_dark2.png"
 import {
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
   MessageSquare,
   Mail,
   User,
@@ -26,7 +22,6 @@ import {
   Smile,
   Building2,
   ChevronDown,
-  ArrowUpRight,
   MessageCircle,
   Shield,
   Sun,
@@ -34,9 +29,7 @@ import {
 } from "lucide-react";
 
 import Illustration from "../../utils/imgs/college project-amico.svg"
-/* Assets (served from public/) */
-// const ExamsBro = "/college project-amico.svg";
-// const logo = "/logo.png";
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -724,47 +717,7 @@ export function Footer() {
 
 /* ------------------ HomePage (combines everything) ------------------ */
 export function HomePage() {
-  const [contact, setContact] = useState({ name: "", email: "", message: "" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState("idle");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [fieldErrors, setFieldErrors] = useState({});
-  const MESSAGE_LIMIT = 1000;
 
-  const handleContactChange = (e) => {
-    const { name, value } = e.target;
-    setContact((s) => ({ ...s, [name]: value }));
-    setFieldErrors((s) => ({ ...s, [name]: "" }));
-  };
-
-  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-  const handleContactSubmit = (e) => {
-    e.preventDefault();
-    setStatus("idle");
-    setErrorMessage("");
-    const errors = {};
-    if (!contact.name.trim()) errors.name = "Le nom est requis.";
-    if (!contact.email.trim()) errors.email = "L'email est requis.";
-    else if (!validateEmail(contact.email)) errors.email = "L'email fourni est invalide.";
-    if (!contact.message.trim()) errors.message = "Le message est requis.";
-    else if (contact.message.length > MESSAGE_LIMIT) errors.message = `Le message dépasse la limite de ${MESSAGE_LIMIT} caractères.`;
-
-    if (Object.keys(errors).length) {
-      setFieldErrors(errors);
-      setStatus("error");
-      setErrorMessage("Veuillez corriger les champs indiqués.");
-      return;
-    }
-
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setStatus("success");
-      setContact({ name: "", email: "", message: "" });
-      setFieldErrors({});
-    }, 700);
-  };
 
   return (
     <>
