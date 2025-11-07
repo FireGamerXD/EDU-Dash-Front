@@ -67,13 +67,13 @@ export const LoginPage = () => {
             {/* Email */}
             <div>
               <label className="block text-gray-700 text-sm sm:text-base font-medium mb-2 sm:mb-3">
-                Adresse e-mail
+                E-mail ou Massar Code
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="exemple@ecole.com"
+                placeholder="exemple@gmail.com"
                 required
                 className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl border text-sm sm:text-[15px] border-gray-200 focus:ring-2 focus:ring-[#FFA500] focus:outline-none transition-all"
               />

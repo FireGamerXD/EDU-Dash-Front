@@ -33,8 +33,9 @@ import Illustration from "../../utils/imgs/college project-amico.svg"
 /* Assets (served from public/) */
 // const ExamsBro = "/college project-amico.svg";
 // const logo = "/logo.png";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-/* ------------------ NavBar ------------------ */
 export function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const links = ["Accueil", "À propos", "Fonctionnalités", "Témoignages", "Contact"];
@@ -47,11 +48,12 @@ export function NavBar() {
         </a>
       </div>
 
+      {/* Desktop Links */}
       <div className="hidden md:flex flex-1 justify-center gap-8 text-md">
         {links.map((item, i) => (
           <a
             key={i}
-            href={`#${item.toLowerCase()}`}
+            href={`#${item.toLowerCase().replace(/\s+/g, '-')}`} // convert spaces to -
             className="text-gray-700 hover:text-[#ffa500] transition-colors duration-200 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-[#ffa500] after:transition-all after:duration-300 hover:after:w-full"
           >
             {item}
@@ -59,12 +61,14 @@ export function NavBar() {
         ))}
       </div>
 
+      {/* Desktop Login */}
       <div className="hidden md:flex items-center ml-6">
         <a href="/login" className="px-4 py-2 rounded-lg bg-[#FFAA27] text-white font-medium hover:bg-orange-500 transition">
           Se Connecter
         </a>
       </div>
 
+      {/* Mobile Hamburger */}
       <div className="md:hidden flex items-center ml-auto">
         <button
           onClick={() => setMenuOpen(!menuOpen)}
@@ -75,9 +79,13 @@ export function NavBar() {
         </button>
       </div>
 
+      {/* Mobile Sidebar */}
       {menuOpen && (
         <>
-          <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40" onClick={() => setMenuOpen(false)}></div>
+          <div 
+            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
+            onClick={() => setMenuOpen(false)}
+          ></div>
 
           <div
             className="fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50"
@@ -90,16 +98,21 @@ export function NavBar() {
             </div>
 
             <div className="flex flex-col items-start py-6 px-6 gap-6">
-              {links.map((item, i) => (
-                <a
-                  key={i}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-gray-700 hover:text-[#ffa500] text-lg"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {item}
-                </a>
-              ))}
+              {links.map((item, i) => {
+                // Hide "Fonctionnalités" in mobile sidebar
+                if (item === "Fonctionnalités") return null;
+
+                return (
+                  <a
+                    key={i}
+                    href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+                    className="text-gray-700 hover:text-[#ffa500] text-lg"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {item}
+                  </a>
+                );
+              })}
               <a
                 href="/login"
                 className="bg-[#ffa500] hover:bg-amber-600 text-white px-6 py-2 rounded-lg transition duration-200 font-semibold mt-2"
@@ -112,6 +125,7 @@ export function NavBar() {
         </>
       )}
 
+
       <style>
         {`
           @keyframes fadeSlideIn {
@@ -123,7 +137,6 @@ export function NavBar() {
     </nav>
   );
 }
-
 /* ------------------ CountUp ------------------ */
 function CountUp({ end = 0, duration = 2800, suffix = "", start = true }) {
   const [value, setValue] = useState(0);
@@ -159,13 +172,20 @@ function CountUp({ end = 0, duration = 2800, suffix = "", start = true }) {
 
 /* ------------------ HeroSection ------------------ */
 export function HeroSection() {
+    useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: "ease-in-out",
+    });
+  }, []);
   return (
-    <section className="relative z-10 overflow-hidden bg-gradient-to-b from-white to-primary-light/30" id="accueil">
+    <section data-aos="fade-down" className="relative z-10 overflow-hidden bg-gradient-to-b from-white to-primary-light/30" id="accueil">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:py-4 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
         {/* Mobile Image */}
         <div className="flex md:hidden justify-center lg:mb-6 mt-4">
           <div className="relative w-full max-w-[280px] rounded-2xl overflow-hidden flex items-center justify-center">
-            <img src={Illustration} alt="Illustration examens EDU Dash" className="object-contain w-full h-auto drop-shadow-lg" />
+            <img src={Illustration}  alt="Illustration examens EDU Dash" className="object-contain w-full h-auto drop-shadow-lg" />
           </div>
         </div>
 
@@ -260,14 +280,14 @@ export function PourquoiEduDash() {
   ];
 
   return (
-    <section id="apropos" className="bg-white py-12">
+    <section id="à-propos" className="bg-white py-12">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="text-center mb-14">
+        <div data-aos="fade-down" className="text-center mb-14">
           <h2 className="lg:text-4xl text-2xl font-bold text-gray-900 mb-3">Pourquoi <span>choisir Edu Dash ?</span></h2>
           <p className="text-gray-600 max-w-2xl mx-auto lg:text-lg text-sm">Une solution pensée pour simplifier, sécuriser et moderniser la gestion des établissements scolaires.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+        <div data-aos="fade-right" className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
           {points.map((item, i) => (
             <div key={i} className="flex items-start space-x-4">
               <div className="flex-shrink-0 bg-[#FFAA27]/10 p-3 rounded-xl">{item.icon}</div>
@@ -385,7 +405,7 @@ export function StatistiquesHome() {
   return (
     <section ref={sectionRef} id="statistiques" className="relative py-24 lg:bg-gradient-to-b lg:from-orange-50 lg:to-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 relative z-10">
-        <div className="text-center mb-16">
+        <div data-aos="fade-down" className="text-center mb-16">
           <h2 className="lg:text-4xl text-3xl font-bold text-gray-900 mb-3">Statistiques <span>Clés</span></h2>
           <p className="text-gray-600 max-w-2xl mx-auto lg:text-lg text-sm">Des chiffres qui illustrent la confiance des écoles envers <span className="font-semibold">Edu Dash</span>.</p>
         </div>
@@ -438,12 +458,12 @@ export function Témoignages() {
   return (
     <section id="témoignages" className="relative lg:py-24 py-12 overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
-        <h2 className="lg:text-4xl text-2xl font-bold text-gray-900 mb-3">Témoignages <span> & Avis</span></h2>
-        <p className="text-gray-600 mb-16 max-w-2xl mx-auto lg:text-lg text-sm">Découvrez ce que disent les utilisateurs d'<strong>EDU Dash</strong> — la solution tout-en-un pour une gestion scolaire fluide et moderne.</p>
+        <h2 data-aos="fade-down" className="lg:text-4xl text-2xl font-bold text-gray-900 mb-3">Témoignages <span> & Avis</span></h2>
+        <p data-aos="fade-down" className="text-gray-600 mb-16 max-w-2xl mx-auto lg:text-lg text-sm">Découvrez ce que disent les utilisateurs d'<strong>EDU Dash</strong> — la solution tout-en-un pour une gestion scolaire fluide et moderne.</p>
 
-        <div className="grid md:grid-cols-3 gap-10">
+        <div  className="grid md:grid-cols-3 gap-10">
           {testimonials.map((t, i) => (
-            <div key={i} className="relative bg-white p-8 rounded-3xl shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 text-left group">
+            <div data-aos="fade-right" key={i} className="relative bg-white p-8 rounded-3xl shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 text-left group">
               <div className="absolute -top-8 left-8 w-16 h-16 rounded-full overflow-hidden shadow-lg border-4 border-white transition-transform duration-300 group-hover:-translate-y-1">
                 <img src={t.img} alt={t.name} className="w-full h-full object-cover" />
               </div>
@@ -510,13 +530,13 @@ export function ContactSection() {
   return (
     <section id="contact" className="bg-white py-20">
       <div className="max-w-6xl mx-auto px-6 md:px-10">
-        <div className="text-center lg:mb-14 mb-8">
+        <div data-aos="fade-down" className="text-center lg:mb-14 mb-8">
           <h2 className="lg:text-4xl text-3xl font-bold text-gray-900 mb-3">Contactez <span>notre équipe</span></h2>
           <div className="lg:flex hidden w-24 h-1 bg-[#FFAA27] mx-auto rounded-full mb-4"></div>
           <p className="text-gray-600 max-w-2xl mx-auto lg:text-lg text-sm">Une question, un partenariat, ou un besoin d’assistance ? N’hésitez pas à nous écrire nous serons ravis de vous répondre.</p>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-10 md:gap-16">
+        <div data-aos="fade-right" className="flex flex-col md:flex-row gap-10 md:gap-16">
           {/* Left: Contact Info (hidden on mobile) */}
           <div className="hidden md:flex lg:flex-1 p-8 flex-col">
             <h3 className="text-2xl font-semibold text-gray-900 mb-6">Informations de contact</h3>
@@ -620,7 +640,7 @@ export function Footer() {
             <li><a href="#accueil" className="hover:text-[#FFAA27] transition-colors duration-300">Accueil</a></li>
             <li><a href="#apropos" className="hover:text-[#FFAA27] transition-colors duration-300">À propos</a></li>
             <li><a href="#fonctionnalites" className="hover:text-[#FFAA27] transition-colors duration-300">Fonctionnalités</a></li>
-            <li><a href="/soon" className="hover:text-[#FFAA27] transition-colors duration-300">Démo</a></li>
+            <li><a href="#témoignages" className="hover:text-[#FFAA27] transition-colors duration-300">Témoignages</a></li>
             <li><a href="#contact" className="hover:text-[#FFAA27] transition-colors duration-300">Contact</a></li>
           </ul>
         </div>
