@@ -1,9 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
   MessageSquare,
   Mail,
   User,
@@ -23,16 +19,12 @@ import {
   Smile,
   Building2,
   ChevronDown,
-  ArrowUpRight,
   MessageCircle,
   Shield,
 } from "lucide-react";
 
 import logo from "../../utils/imgs/edu_dash_logo.png"
 import Illustration from "../../utils/imgs/college project-amico.svg"
-/* Assets (served from public/) */
-// const ExamsBro = "/college project-amico.svg";
-// const logo = "/logo.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
