@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import logo from "../../utils/imgs/edu_dash_logo.png";
 import dark_logo from "../../utils/imgs/edu_dash_dark.png";
-import dark_logo2 from "../../utils/imgs/edu_dash_dark2.png"
+import dark_logo2 from "../../utils/imgs/edu_dash_dark2.png";
+import emailjs from "emailjs-com";
+
 import {
   Facebook,
   Twitter,
@@ -539,6 +541,10 @@ export function Témoignages() {
 
 /* ------------------ ContactSection ------------------ */
 export function ContactSection() {
+  const SERVICE_ID = "service_5nj7mr7";
+  const TEMPLATE_ID = "template_afr0jz9";
+  const PUBLIC_KEY = "NHcIBA3T1lYHkvvIW"; // replace with your public key
+
   const [contact, setContact] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState("idle"); // 'idle' | 'success' | 'error'
@@ -554,10 +560,12 @@ export function ContactSection() {
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  const handleContactSubmit = (e) => {
+  const handleContactSubmit = async (e) => {
     e.preventDefault();
     setStatus("idle");
     setErrorMessage("");
+
+    // Validate fields
     const errors = {};
     if (!contact.name.trim()) errors.name = "Le nom est requis.";
     if (!contact.email.trim()) errors.email = "L'email est requis.";
@@ -573,93 +581,184 @@ export function ContactSection() {
     }
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+
+const templateParams = {
+  name: contact.name,
+  email: contact.email,
+  message: contact.message,
+  time: new Date().toLocaleString(),
+};
+
+
+    try {
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
       setStatus("success");
       setContact({ name: "", email: "", message: "" });
       setFieldErrors({});
-    }, 700);
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      setStatus("error");
+      setErrorMessage("Une erreur est survenue, veuillez réessayer plus tard.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <section id="contact" className="bg-white dark:bg-gray-900 py-20">
       <div className="max-w-6xl mx-auto px-6 md:px-10">
         <div data-aos="fade-down" className="text-center lg:mb-14 mb-8">
-          <h2 className="lg:text-4xl text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3">Contactez <span>notre équipe</span></h2>
+          <h2 className="lg:text-4xl text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3">
+            Contactez <span>notre équipe</span>
+          </h2>
           <div className="lg:flex hidden w-24 h-1 bg-[#FFAA28] mx-auto rounded-full mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto lg:text-lg text-sm">Une question, un partenariat, ou un besoin d’assistance ? N’hésitez pas à nous écrire nous serons ravis de vous répondre.</p>
+          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto lg:text-lg text-sm">
+            Une question, un partenariat, ou un besoin d’assistance ? N’hésitez
+            pas à nous écrire, nous serons ravis de vous répondre.
+          </p>
         </div>
 
         <div data-aos="fade-right" className="flex flex-col md:flex-row gap-10 md:gap-16">
-          {/* Left: Contact Info (hidden on mobile) */}
+          {/* Left Side */}
           <div className="hidden md:flex lg:flex-1 p-8 flex-col">
-            <h3 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6">Informations de contact</h3>
+            <h3 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6">
+              Informations de contact
+            </h3>
 
             <ul className="space-y-6 text-gray-700 dark:text-gray-300">
               <li className="flex items-start gap-4">
-                <div className="bg-[#FFAA28]/10 text-[#FFAA28] p-3 rounded-full"><Mail size={20} /></div>
-                <div><p className="font-semibold">E-mail</p><p className="text-gray-600 dark:text-gray-300">edudashma@gmail.com</p></div>
+                <div className="bg-[#FFAA28]/10 text-[#FFAA28] p-3 rounded-full">
+                  <Mail size={20} />
+                </div>
+                <div>
+                  <p className="font-semibold">E-mail</p>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    edudashma@gmail.com
+                  </p>
+                </div>
               </li>
               <li className="flex items-start gap-4">
-                <div className="bg-[#FFAA28]/10 text-[#FFAA28] p-3 rounded-full"><MapPin size={20} /></div>
-                <div><p className="font-semibold">Adresse</p><p className="text-gray-600 dark:text-gray-300">Casablanca, Maroc</p></div>
+                <div className="bg-[#FFAA28]/10 text-[#FFAA28] p-3 rounded-full">
+                  <MapPin size={20} />
+                </div>
+                <div>
+                  <p className="font-semibold">Adresse</p>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Casablanca, Maroc
+                  </p>
+                </div>
               </li>
               <li className="flex items-start gap-4">
-                <div className="bg-[#FFAA28]/10 text-[#FFAA28] p-3 rounded-full"><Clock size={20} /></div>
-                <div><p className="font-semibold">Horaires</p><p className="text-gray-600 dark:text-gray-300">Lun - Ven : 9h à 18h</p></div>
+                <div className="bg-[#FFAA28]/10 text-[#FFAA28] p-3 rounded-full">
+                  <Clock size={20} />
+                </div>
+                <div>
+                  <p className="font-semibold">Horaires</p>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Lun - Ven : 9h à 18h
+                  </p>
+                </div>
               </li>
             </ul>
-
-            <div className="mt-10 border-t border-gray-100 dark:border-gray-700 pt-6">
-              <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Besoin d’aide rapide ?</h4>
-              <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">Vous pouvez également consulter notre centre d’aide ou contacter un responsable de votre établissement pour un accompagnement direct.</p>
-            </div>
           </div>
 
-          {/* Right: Contact Form */}
+          {/* Right Side (Form) */}
           <div className="flex-[1.3] bg-white dark:bg-gray-800 px-4 lg:p-8 lg:space-y-6">
             <form onSubmit={handleContactSubmit} className="space-y-6">
               <div>
-                <label className="block text-gray-800 dark:text-gray-200 text-sm font-medium mb-2">Votre nom</label>
+                <label className="block text-gray-800 dark:text-gray-200 text-sm font-medium mb-2">
+                  Votre nom
+                </label>
                 <div className="relative">
-                  <User size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-400" />
-                  <input name="name" value={contact.name} onChange={handleContactChange} placeholder="Jean Dupont" required
-                    className="w-full pl-10 pr-3 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 placeholder-gray-400 dark:placeholder-gray-400 text-gray-700 dark:text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFAA28]/40 focus:border-[#FFAA28] transition" />
+                  <User
+                    size={18}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  />
+                  <input
+                    name="name"
+                    value={contact.name}
+                    onChange={handleContactChange}
+                    placeholder="Jean Dupont"
+                    className="w-full pl-10 pr-3 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 text-sm focus:ring-2 focus:ring-[#FFAA28]/40 focus:border-[#FFAA28] transition"
+                  />
+                  {fieldErrors.name && (
+                    <p className="text-red-500 text-xs mt-1">{fieldErrors.name}</p>
+                  )}
                 </div>
               </div>
 
               <div>
-                <label className="block text-gray-800 dark:text-gray-200 text-sm font-medium mb-2">E-mail</label>
+                <label className="block text-gray-800 dark:text-gray-200 text-sm font-medium mb-2">
+                  E-mail
+                </label>
                 <div className="relative">
-                  <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-400" />
-                  <input type="email" name="email" value={contact.email} onChange={handleContactChange} placeholder="email@example.com" required
-                    className="w-full pl-10 pr-3 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 placeholder-gray-400 dark:placeholder-gray-400 text-gray-700 dark:text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFAA28]/40 focus:border-[#FFAA28] transition" />
+                  <Mail
+                    size={18}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    value={contact.email}
+                    onChange={handleContactChange}
+                    placeholder="email@example.com"
+                    className="w-full pl-10 pr-3 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 text-sm focus:ring-2 focus:ring-[#FFAA28]/40 focus:border-[#FFAA28] transition"
+                  />
+                  {fieldErrors.email && (
+                    <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>
+                  )}
                 </div>
               </div>
 
               <div>
-                <label className="block text-gray-800 dark:text-gray-200 text-sm font-medium mb-2">Message</label>
+                <label className="block text-gray-800 dark:text-gray-200 text-sm font-medium mb-2">
+                  Message
+                </label>
                 <div className="relative">
-                  <MessageSquare size={18} className="absolute left-3 top-4 text-gray-400 dark:text-gray-400" />
-                  <textarea name="message" value={contact.message} onChange={handleContactChange} rows={5} placeholder="Votre message..." required
-                    className="w-full pl-10 pr-3 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 placeholder-gray-400 dark:placeholder-gray-400 text-gray-700 dark:text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFAA28]/40 focus:border-[#FFAA28] transition resize-none" />
+                  <MessageSquare
+                    size={18}
+                    className="absolute left-3 top-4 text-gray-400"
+                  />
+                  <textarea
+                    name="message"
+                    value={contact.message}
+                    onChange={handleContactChange}
+                    rows={5}
+                    placeholder="Votre message..."
+                    className="w-full pl-10 pr-3 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 text-sm focus:ring-2 focus:ring-[#FFAA28]/40 focus:border-[#FFAA28] transition resize-none"
+                  />
+                  {fieldErrors.message && (
+                    <p className="text-red-500 text-xs mt-1">{fieldErrors.message}</p>
+                  )}
                 </div>
               </div>
 
-              <button type="submit" disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 py-3 bg-[#FFAA28] hover:bg-orange-500 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full flex items-center justify-center gap-2 py-3 bg-[#FFAA28] hover:bg-orange-500 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition"
+              >
                 {isSubmitting ? "Envoi..." : "Envoyer"}
               </button>
             </form>
 
-            {status === "error" && <p className="text-red-500 text-sm mt-2 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 p-2 rounded-lg">{errorMessage}</p>}
-            {status === "success" && <p className="text-green-600 text-sm mt-2 bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800 p-2 rounded-lg">Merci ! Votre message a été envoyé avec succès.</p>}
+            {status === "error" && (
+              <p className="text-red-500 text-sm mt-3">
+                {errorMessage || "Erreur d'envoi, veuillez réessayer."}
+              </p>
+            )}
+            {status === "success" && (
+              <p className="text-green-600 text-sm mt-3">
+                Merci ! Votre message a été envoyé avec succès.
+              </p>
+            )}
           </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 /* ------------------ FinalCTA ------------------ */
 export function FinalCTA() {
