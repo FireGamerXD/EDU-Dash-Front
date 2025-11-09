@@ -46,7 +46,6 @@ export const LoginPage = () => {
         data-aos="fade-left"
         className="w-full md:w-1/2 flex items-center justify-center relative overflow-hidden"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white to-white z-0"></div>
 
         <div className="z-10 w-full max-w-md sm:max-w-lg px-6 sm:px-10 py-12 sm:py-16">
           {/* Logo */}
