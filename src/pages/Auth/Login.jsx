@@ -29,10 +29,6 @@ export const LoginPage = () => {
 
   return (
     <section className="min-h-screen flex flex-col md:flex-row bg-white relative overflow-hidden">
-      {/* Floating gradient orbs */}
-      <div className="absolute top-20 left-10 w-56 h-56 bg-orange-100 rounded-full blur-3xl opacity-40 animate-pulse"></div>
-      <div className="absolute bottom-10 right-10 w-72 h-72 bg-orange-300 rounded-full blur-3xl opacity-30 animate-pulse"></div>
-
       {/* Left Illustration */}
       <motion.div
         data-aos="fade-right"
