@@ -28,7 +28,7 @@ export const LoginPage = () => {
   }, []);
 
   return (
-    <section className="min-h-screen flex flex-col md:flex-row bg-white relative overflow-hidden">
+    <section className="min-h-screen flex flex-col  md:flex-row bg-white relative overflow-hidden">
       {/* Left Illustration */}
       <motion.div
         data-aos="fade-right"
