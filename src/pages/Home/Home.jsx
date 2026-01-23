@@ -867,7 +867,9 @@ export function HomePage() {
     }, 700);
   };
 
-  <Helmet>
+  return (
+    <>
+      <Helmet>
         <title>EDU Dash - Gestion Scolaire Simple et Efficace</title>
         <meta name="description" content="EDU Dash centralise la gestion scolaire, les paiements, absences, bulletins et communication avec une interface simple et moderne." />
         <meta name="keywords" content="gestion scolaire, EDU Dash, edudash , edu dash ,  education dashboard , éducation, école, paiement, absence, bulletin, parent, enseignant" />
@@ -886,9 +888,6 @@ export function HomePage() {
         <meta name="twitter:description" content="Centralisez la gestion de votre école avec EDU Dash : paiement, absences, bulletins et communication en un seul endroit." />
         <meta name="twitter:image" content="https://votre-site-vercel.vercel.app/logo.png" />
       </Helmet>
-
-  return (
-    <>
       <div style={{ fontFamily: "'Poppins', sans-serif" }}>
         <NavBar />
         <HeroSection />
