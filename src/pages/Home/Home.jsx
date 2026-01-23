@@ -41,6 +41,7 @@ import Illustration from "../../utils/imgs/college project-amico.svg"
 // const logo = "/logo.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { Helmet } from "react-helmet-async";
 
 export function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -541,9 +542,10 @@ export function Témoignages() {
 
 /* ------------------ ContactSection ------------------ */
 export function ContactSection() {
-  const SERVICE_ID = "service_5nj7mr7";
-  const TEMPLATE_ID = "template_afr0jz9";
-  const PUBLIC_KEY = "NHcIBA3T1lYHkvvIW"; // replace with your public key
+const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+ // replace with your public key
 
   const [contact, setContact] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -864,6 +866,26 @@ export function HomePage() {
       setFieldErrors({});
     }, 700);
   };
+
+  <Helmet>
+        <title>EDU Dash - Gestion Scolaire Simple et Efficace</title>
+        <meta name="description" content="EDU Dash centralise la gestion scolaire, les paiements, absences, bulletins et communication avec une interface simple et moderne." />
+        <meta name="keywords" content="gestion scolaire, EDU Dash, edudash , edu dash ,  education dashboard , éducation, école, paiement, absence, bulletin, parent, enseignant" />
+        <meta name="author" content="EDU Dash" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="EDU Dash - Gestion Scolaire Simple et Efficace" />
+        <meta property="og:description" content="Centralisez la gestion de votre école avec EDU Dash : paiement, absences, bulletins et communication en un seul endroit." />
+        <meta property="og:image" content="https://votre-site-vercel.vercel.app/edudash_mini_logo.png" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://votre-site-vercel.vercel.app" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="EDU Dash - Gestion Scolaire Simple et Efficace" />
+        <meta name="twitter:description" content="Centralisez la gestion de votre école avec EDU Dash : paiement, absences, bulletins et communication en un seul endroit." />
+        <meta name="twitter:image" content="https://votre-site-vercel.vercel.app/logo.png" />
+      </Helmet>
 
   return (
     <>
