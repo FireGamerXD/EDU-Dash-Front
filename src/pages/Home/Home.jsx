@@ -34,7 +34,7 @@ export const NavBar = () => {
     <nav className="sticky top-0 z-50 flex h-[80px] w-full items-center bg-white px-4 md:px-8">
       <div className="flex lg:w-[24%] lg:min-w-[160px] items-center">
         <a href="/">
-          <img src={logo} className="w-50 lg:h-12 lg:w-54" alt="EduDash Logo" />
+          <img src={logo} className="w-44 lg:h-12 lg:w-54" alt="EduDash Logo" />
         </a>
       </div>
 
