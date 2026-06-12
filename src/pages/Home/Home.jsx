@@ -60,11 +60,15 @@ export const NavBar = () => {
 
   return (
     <nav className="sticky top-0 z-50 flex h-[80px] w-full items-center bg-white px-4 md:px-8">
-      {/* Logo — DO NOT TOUCH */}
-      <div className="flex items-center lg:w-[24%] lg:min-w-[160px]">
-        <a href="/">
-          <img src={logo} className="w-50 lg:h-12 lg:w-54" alt="EduDash Logo" />
-        </a>
+      {/* Logo */}
+      <div className="flex justify-center py-7">
+        <div className="w-56 flex justify-center">
+          <img
+            src={logo}
+            className="w-full max-w-full h-auto transition-transform duration-300 hover:scale-105"
+            alt="EduDash Logo"
+          />
+        </div>
       </div>
 
       {/* Desktop Navigation — DO NOT TOUCH */}
@@ -88,47 +92,85 @@ export const NavBar = () => {
 
       {/* Desktop CTA — DO NOT TOUCH */}
       <div className="ml-6 hidden items-center md:flex">
-        <a href="/login" className="rounded-lg bg-[#FFAA27] px-4 py-2 font-medium text-white transition hover:bg-orange-500">
+        <a
+          href="/login"
+          className="rounded-lg bg-[#FFAA27] px-4 py-2 font-medium text-white transition hover:bg-orange-500"
+        >
           Se Connecter
         </a>
       </div>
 
       {/* Mobile Burger */}
       <div className="ml-auto flex items-center md:hidden">
-        <button onClick={() => setMenuOpen(true)} className="text-3xl text-[#ffa500]" aria-label="Ouvrir le menu">
+        <button
+          onClick={() => setMenuOpen(true)}
+          className="text-3xl text-[#ffa500] transition-transform active:scale-90"
+          aria-label="Ouvrir le menu"
+        >
           &#9776;
         </button>
       </div>
 
-      {/* ================= MOBILE SIDEBAR ================= */}
+      {/* ================= PREMIUM MOBILE SIDEBAR ================= */}
       {menuOpen && (
         <>
           {/* Overlay */}
-          <div className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm" onClick={() => setMenuOpen(false)} />
+          <div
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm transition-opacity duration-300"
+            onClick={() => setMenuOpen(false)}
+          />
 
           {/* Sidebar */}
-          <div className="fixed top-0 left-0 z-50 h-full w-64 bg-white shadow-xl" style={{ animation: 'slideIn 0.3s ease forwards' }}>
+          <div
+            className="fixed left-0 top-0 z-50 h-full w-72 bg-white backdrop-blur-xl shadow-2xl border-r border-white/20"
+            style={{
+              animation: 'drawerIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+            }}
+          >
+            {/* Top Glow Accent */}
+            <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400" />
+
             {/* Logo */}
-            <div className="flex justify-center py-6">
-              <img src={logo} className="h-10" alt="EduDash Logo" />
+            <div className="flex justify-center py-7">
+              <img
+                src={logo}
+                className="w-52 h-auto transition-transform duration-300 hover:scale-105"
+                alt="EduDash Logo"
+              />
             </div>
 
             {/* Links */}
-            <div className="flex flex-col gap-6 px-6 py-6">
+            <div className="flex flex-col gap-3 px-6 py-4">
               {[
                 ['Accueil', '#accueil'],
                 ['À propos', '#apropos'],
                 ['Témoignages', '#Témoignages'],
                 ['Contact', '#contact'],
-              ].map(([label, href]) => (
-                <a key={label} href={href} className="text-lg text-gray-700 hover:text-[#ffa500]" onClick={() => setMenuOpen(false)}>
-                  {label}
+              ].map(([label, href], i) => (
+                <a
+                  key={label}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="group relative flex items-center gap-3 rounded-xl px-4 py-3 text-gray-700 transition-all duration-300 hover:bg-white/60 hover:shadow-md hover:translate-x-1"
+                  style={{
+                    animation: `fadeSlide 0.35s ease forwards`,
+                    animationDelay: `${i * 0.05}s`,
+                    opacity: 0,
+                  }}
+                >
+                  {/* Animated dot indicator */}
+                  <span className="h-2 w-2 rounded-full bg-[#ffa500] opacity-60 transition-all duration-300 group-hover:opacity-100 group-hover:scale-125" />
+
+                  <span className="transition-colors duration-200 group-hover:text-[#ffa500]">
+                    {label}
+                  </span>
                 </a>
               ))}
 
+              {/* CTA */}
               <a
                 href="/login"
-                className="mt-4 rounded-lg bg-[#FFAA27] px-6 py-2 text-center font-semibold text-white hover:bg-amber-600"
+                className="mt-4 rounded-xl bg-[#FFAA27]  px-6 py-3 text-center font-semibold text-white shadow-md transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
                 onClick={() => setMenuOpen(false)}
               >
                 Se Connecter
@@ -138,12 +180,29 @@ export const NavBar = () => {
         </>
       )}
 
-      {/* Animation */}
+      {/* Animations */}
       <style>
         {`
-          @keyframes slideIn {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
+          @keyframes drawerIn {
+            from {
+              transform: translateX(-100%);
+              opacity: 0.6;
+            }
+            to {
+              transform: translateX(0);
+              opacity: 1;
+            }
+          }
+
+          @keyframes fadeSlide {
+            from {
+              opacity: 0;
+              transform: translateX(-10px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
           }
         `}
       </style>
@@ -195,41 +254,44 @@ export function HeroSection() {
       className="to-primary-light/30 relative z-10 overflow-hidden bg-gradient-to-b from-white dark:from-gray-900 dark:to-gray-800"
       id="accueil"
     >
-      <div className="max-w-8xl grid grid-cols-1 items-center gap-8 px-4 py-12 sm:px-6 sm:py-16 md:grid-cols-2 md:gap-12 md:py-14">                {/* Mobile Image */}
+      <div className="max-w-8xl grid grid-cols-1 items-center gap-8 px-4 py-4 sm:px-6 sm:py-16 md:grid-cols-2 md:gap-12 md:py-14">
+        {/* Mobile Image */}
         <div className="flex justify-center md:hidden">
           <div className="relative flex w-full max-w-[380px] items-center justify-center">
             <img
               src={herosectionImage}
               alt="Illustration examens EDU Dash"
-              className="h-auto w-full object-contain drop-shadow-xl"
+              className="w-full object-contain drop-shadow-xl"
             />
           </div>
         </div>
 
         {/* Text */}
-        {/* Text */}
         <div className="mx-auto mb-12 w-full max-w-full text-center md:text-left lg:mb-0 lg:max-w-2xl">
-          {/* Badge */}
-          {/* <div className="mb-6 inline-flex items-center rounded-full border border-[#FFAA28]/20 bg-[#FFAA28]/10 px-4 py-2 text-sm font-medium text-[#FFAA28]">
-        Conçu pour les établissements marocains 🇲🇦
-    </div> */}
-
-          {/* Title */}
-          <h1 className="font-display text-neutral-dark text-4xl leading-tight font-bold tracking-tight lg:text-6xl dark:text-gray-100">
-            Maîtrisez votre établissement
-            <span className="block">
-              en temps réel.
-            </span>
+          {/* Mobile Title */}
+          <h1 className="font-display text-neutral-dark text-2xl leading-snug font-bold tracking-tight md:hidden dark:text-gray-100">
+            Maîtrisez votre établissement en temps réel.
           </h1>
 
-          {/* Subtitle */}
-          <p className="text-neutral-gray mt-6 max-w-xl text-lg leading-relaxed dark:text-gray-300">
+          {/* Mobile Subtitle */}
+          <p className="text-neutral-gray mt-3 text-sm leading-relaxed md:hidden dark:text-gray-300">
+            Une plateforme unique pour gérer votre école.
+          </p>
+
+          {/* Desktop Title */}
+          <h1 className="font-display text-neutral-dark hidden text-4xl leading-tight font-bold tracking-tight md:block lg:text-6xl dark:text-gray-100">
+            Maîtrisez votre établissement
+            <span className="block">en temps réel.</span>
+          </h1>
+
+          {/* Desktop Subtitle */}
+          <p className="text-neutral-gray mt-6 hidden max-w-xl text-lg leading-relaxed md:block dark:text-gray-300">
             Centralisez la gestion des élèves, des paiements, des emplois du temps
             et des communications au sein d'une plateforme moderne et intuitive.
           </p>
 
           {/* Benefits */}
-          <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-gray-600 md:justify-start dark:text-gray-400">
+          <div className="mt-8 hidden flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-gray-600 md:flex md:justify-start dark:text-gray-400">
             <div className="flex items-center gap-2">
               <span className="text-[#FFAA28]">✓</span>
               Gestion centralisée
@@ -262,14 +324,28 @@ export function HeroSection() {
           </div>
 
           {/* Mobile Button */}
-          <div className="mt-8 flex justify-center lg:hidden">
-            <a
-              href="/login"
-              className="rounded-xl bg-[#FFAA28] px-8 py-3 text-base font-semibold text-white shadow-md transition hover:bg-orange-500"
-            >
-              Se connecter
-            </a>
-          </div>
+<div className="mt-8 flex gap-4 lg:hidden">
+
+  {/* PRIMARY CTA */}
+  <a
+    href="/login"
+    className="flex-1 flex items-center justify-center rounded-xl bg-[#FFAA28] px-4 py-3 font-medium text-white transition hover:bg-[#e09a20]"
+  >
+    Se connecter
+  </a>
+
+  {/* SECONDARY CTA (muted green, not loud) */}
+  <a
+    href="https://wa.me/212765232205?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex-1 flex items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-green-500 bg-white px-4 py-3 font-medium text-green-500 transition hover:bg-gray-50"
+  >
+    <FaWhatsapp className="h-5 w-5 shrink-0 text-green-500" />
+    <span>Démo WhatsApp</span>
+  </a>
+
+</div>
         </div>
 
         {/* Desktop Image */}
@@ -284,49 +360,14 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll Indicators */}
-
       {/* Desktop Mouse Scroll */}
       <div className="absolute bottom-28 left-1/2 z-50 hidden -translate-x-1/2 flex-col items-center md:flex">
         <a href="#apropos" className="flex cursor-pointer flex-col items-center">
           <div className="flex h-12 w-6 items-start justify-center rounded-full border-2 border-gray-400 p-1">
             <div className="animate-scrollDown h-1 w-1 rounded-full bg-gray-400" />
           </div>
-          {/* <span className="mt-2 text-sm text-gray-500 dark:text-gray-400">Scroll</span> */}
         </a>
       </div>
-
-      <style>
-        {`
-    @keyframes scrollDown {
-        0% { transform: translateY(0); opacity: 0; }
-        50% { transform: translateY(6px); opacity: 1; }
-        100% { transform: translateY(0); opacity: 0; }
-    }
-    .animate-scrollDown {
-        animation: scrollDown 1.5s infinite;
-    }
-    `}
-      </style>
-
-      {/* Mobile Arrow Button */}
-      {/* <div className="flex md:hidden fixed right-4 bottom-16 z-50">
-        <a
-          href="#apropos"
-          className="flex items-center justify-center w-10 h-10 rounded-full text-[#FFAA28] border hover:scale-110 transition-transform animate-bounce"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-        </a>
-      </div> */}
 
       {/* Trusted By Section */}
       <div className="relative hidden border-t border-gray-100 bg-white/70 pt-6 backdrop-blur-sm md:px-12 lg:block lg:px-6 lg:px-24 lg:py-8 lg:pt-3 dark:border-gray-700 dark:bg-gray-900/50">
@@ -344,7 +385,6 @@ export function HeroSection() {
             50% { transform: translateY(6px); opacity: 1; }
             100% { transform: translateY(0); opacity: 0; }
           }
-
           .animate-scrollDown {
             animation: scrollDown 1.5s infinite;
           }
@@ -364,7 +404,59 @@ export function StatsSection() {
   return (
     <section className="pb-8">
       <div className="mx-auto max-w-5xl px-6">
-        <div className="flex flex-wrap items-center justify-center divide-x divide-gray-100">
+
+        {/* ================= MOBILE ONLY ================= */}
+        <div className="sm:hidden">
+
+{/* Featured (main value) */}
+<div className="mb-4 rounded-2xl border border-gray-200 bg-white shadow-sm">
+
+  <div className="flex items-center gap-3 p-5">
+
+    {/* accent dot */}
+    <div className="h-2 w-2 rounded-full bg-[#FFAA27]" />
+
+    <div className="flex-1">
+      <div className="text-sm font-medium text-gray-900">
+        Solution 100% adaptée aux établissements scolaires
+      </div>
+
+      <div className="text-xs text-gray-500 mt-1">
+        EduDash • Plateforme centralisée
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+          {/* 2 supporting cards */}
+          <div className="grid grid-cols-2 gap-4">
+
+            <div className="flex flex-col items-center justify-center rounded-2xl border border-gray-100 bg-white shadow-sm py-5 active:scale-[0.98] transition">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#FFAA27]/10">
+                <HeadphonesIcon className="h-6 w-6 text-[#FFAA27]" />
+              </div>
+              <span className="mt-2 text-xs font-medium text-gray-800 text-center">
+                Support local
+              </span>
+            </div>
+
+            <div className="flex flex-col items-center justify-center rounded-2xl border border-gray-100 bg-white shadow-sm py-5 active:scale-[0.98] transition">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#FFAA27]/10">
+                <ShieldCheck className="h-6 w-6 text-[#FFAA27]" />
+              </div>
+              <span className="mt-2 text-xs font-medium text-gray-800 text-center">
+                Hébergement sécurisé
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* ================= DESKTOP (UNCHANGED) ================= */}
+        <div className="hidden sm:flex flex-wrap items-center justify-center divide-x divide-gray-100">
           {items.map((item) => {
             const Icon = item.icon;
             return (
@@ -379,37 +471,35 @@ export function StatsSection() {
             );
           })}
         </div>
+
       </div>
     </section>
   );
 }
 
 export function PourquoiEduDash() {
+  const [expanded, setExpanded] = useState(false);
+
   const points = [
-    // {
-    //     icon: <Layers className="h-6 w-6 text-[#FFAA27]" />,
-    //     title: 'Espace Scolaire Dédié et Sécurisé',
-    //     desc: 'Chaque établissement bénéficie d’un environnement numérique privé, structuré et sécurisé pour une gestion sereine et professionnelle.',
-    // },
     {
       icon: <Eye className="h-6 w-6 text-[#FFAA27]" />,
       title: 'Une vision claire pour décider plus vite',
       desc: 'Accédez en un instant aux données essentielles : soldes, absences, performances et statistiques clés pour piloter votre école efficacement.',
     },
     {
+      icon: <Shield className="h-6 w-6 text-[#FFAA27]" />,
+      title: 'Toute votre gestion sur une seule plateforme',
+      desc: 'Élèves, classes, enseignants, finances, documents… tout est centralisé pour éviter les outils multiples et les pertes de temps.',
+    },
+    {
       icon: <BarChart3 className="h-6 w-6 text-[#FFAA27]" />,
       title: 'Une solution moderne, pensée pour évoluer',
-      desc: 'Conçue pour les écoles marocaines et européennes, EDU Dash s’adapte à votre croissance et à vos besoins futurs.',
+      desc: 'Conçue pour les écoles marocaines et européennes, EDU Dash s\u2019adapte à votre croissance et à vos besoins futurs.',
     },
     {
       icon: <ShieldCheck className="h-6 w-6 text-[#FFAA27]" />,
       title: 'Contrôle Avancé par Rôles et Permissions',
-      desc: 'Un système d’accès intelligent qui garantit que chaque acteur voit uniquement les informations qui le concernent.',
-    },
-    {
-      icon: <Shield className="h-6 w-6 text-[#FFAA27]" />,
-      title: 'Toute votre gestion sur une seule plateforme',
-      desc: 'Élèves, classes, enseignants, finances, documents… tout est centralisé pour éviter les outils multiples et les pertes de temps.',
+      desc: 'Un système d\u2019accès intelligent qui garantit que chaque acteur voit uniquement les informations qui le concernent.',
     },
     {
       icon: <FileDown className="h-6 w-6 text-[#FFAA27]" />,
@@ -418,10 +508,13 @@ export function PourquoiEduDash() {
     },
     {
       icon: <Globe2 className="h-6 w-6 text-[#FFAA27]" />,
-      title: 'Pensé pour les Écoles d’Aujourd’hui',
+      title: 'Pensé pour les Écoles d\u2019Aujourd\u2019hui',
       desc: 'Une solution moderne, conforme aux besoins des établissements marocains et européens, prête à évoluer avec votre structure.',
     },
   ];
+
+  // First 3 points shown by default on mobile
+  const visiblePointsMobile = expanded ? points : points.slice(0, 3);
 
   return (
     <section id="apropos" className="relative bg-white py-14">
@@ -437,7 +530,29 @@ export function PourquoiEduDash() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-x-14 gap-y-12 md:grid-cols-2">
+        {/* Mobile: 3 cards + expandable */}
+        <div className="grid grid-cols-1 gap-x-14 gap-y-8 md:hidden">
+          {visiblePointsMobile.map((item, i) => (
+            <div key={i} className="group flex items-start space-x-5">
+              <div className="flex-shrink-0 rounded-xl bg-[#FFAA27]/10 p-3 transition group-hover:bg-[#FFAA27]/20">{item.icon}</div>
+              <div>
+                <h3 className="mb-2 text-lg font-semibold text-gray-900">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-gray-600">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+
+          <button
+            onClick={() => setExpanded((v) => !v)}
+            className="mx-auto mt-2 flex items-center gap-1.5 rounded-full bg-[#FFAA27]/10 px-5 py-2 text-sm font-semibold text-[#FFAA27] transition hover:bg-[#FFAA27]/20"
+          >
+            {expanded ? 'Voir moins' : 'Voir plus'}
+            <ChevronDown className={`h-4 w-4 transition-transform ${expanded ? 'rotate-180' : ''}`} />
+          </button>
+        </div>
+
+        {/* Desktop: all 6 cards */}
+        <div className="hidden grid-cols-1 gap-x-14 gap-y-12 md:grid md:grid-cols-2">
           {points.map((item, i) => (
             <div key={i} className="group flex items-start space-x-5">
               <div className="flex-shrink-0 rounded-xl bg-[#FFAA27]/10 p-3 transition group-hover:bg-[#FFAA27]/20">{item.icon}</div>
@@ -448,7 +563,6 @@ export function PourquoiEduDash() {
             </div>
           ))}
         </div>
-        {/* <div className="absolute left-0 bottom-0 w-full h-1 bg-gradient-to-r from-[#FFAA27]/20 via-transparent to-[#FFAA27]/20 pointer-events-none" /> */}
       </div>
     </section>
   );
@@ -459,38 +573,34 @@ export function HowItWorksSection() {
     {
       icon: Building2,
       title: "Création de votre établissement",
-      description:
-        "Nous configurons votre espace selon votre structure et vos besoins.",
+      description: "Nous configurons votre espace selon votre structure et vos besoins.",
     },
     {
       icon: Upload,
       title: "Importation des données",
-      description:
-        "Import simple des élèves, enseignants et informations existantes.",
+      description: "Import simple des élèves, enseignants et informations existantes.",
     },
     {
       icon: GraduationCap,
       title: "Formation de votre équipe",
-      description:
-        "Accompagnement personnalisé pour une prise en main rapide.",
+      description: "Accompagnement personnalisé pour une prise en main rapide.",
     },
     {
       icon: Rocket,
       title: "Mise en service",
-      description:
-        "Votre établissement est opérationnel sur Edu Dash.",
+      description: "Votre établissement est opérationnel sur Edu Dash.",
     },
   ];
 
   return (
-    <section className="py-14">
+    <section className="lg:py-14 lg:pb-0 pb-8">
       <div className="mx-auto max-w-7xl px-6">
         <div className="text-center">
-          <span className="rounded-full bg-[#FFAA27]/10 px-4 py-2 text-sm font-semibold text-[#FFAA27]">
+          <span className="hidden lg:inline-flex rounded-full bg-[#FFAA27]/10 px-4 py-1 text-sm font-medium text-[#FFAA27]">
             Mise en place simplifiée
           </span>
 
-          <h2 className="mt-6 text-4xl font-bold text-gray-900">
+          <h2 className="mt-6 text-3xl font-bold text-gray-900 lg:text-4xl">
             Déployez Edu Dash en quelques étapes
           </h2>
 
@@ -499,31 +609,31 @@ export function HowItWorksSection() {
           </p>
         </div>
 
-        <div className="relative mt-20">
+        <div className="relative mt-12 lg:mt-20">
           <div className="absolute left-0 right-0 top-10 hidden h-0.5 bg-[#FFAA27]/20 lg:block" />
 
-          <div className="grid gap-8 lg:grid-cols-4">
+          <div className="grid gap-5 lg:grid-cols-4 lg:gap-8">
             {steps.map((step, index) => {
               const Icon = step.icon;
 
               return (
                 <div
                   key={step.title}
-                  className="relative rounded-3xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+                  className="relative rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl lg:rounded-3xl lg:p-8"
                 >
-                  <div className="absolute -top-4 left-8 flex h-8 w-8 items-center justify-center rounded-full bg-[#FFAA27] text-sm font-bold text-white">
+                  <div className="absolute -top-4 left-6 flex h-8 w-8 items-center justify-center rounded-full bg-[#FFAA27] text-sm font-bold text-white lg:left-8">
                     {index + 1}
                   </div>
 
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#FFAA27]/10">
-                    <Icon className="h-8 w-8 text-[#FFAA27]" />
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FFAA27]/10 lg:mb-6 lg:h-16 lg:w-16">
+                    <Icon className="h-6 w-6 text-[#FFAA27] lg:h-8 lg:w-8" />
                   </div>
 
-                  <h3 className="text-lg font-bold text-gray-900">
+                  <h3 className="text-base font-bold text-gray-900 lg:text-lg">
                     {step.title}
                   </h3>
 
-                  <p className="mt-3 text-sm leading-relaxed text-gray-600">
+                  <p className="mt-2 text-sm leading-relaxed text-gray-600 lg:mt-3">
                     {step.description}
                   </p>
                 </div>
@@ -562,37 +672,38 @@ export function ProductPreview() {
   ];
 
   return (
-    <section className="bg-white py-14 ">
-      <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
+    <section className="bg-white py-10 lg:py-14">
+      <div className="mx-auto max-w-7xl px-3 md:px-12 lg:px-20">
         {/* Header */}
         <div className="mx-auto max-w-5xl text-center">
           <span className="inline-flex rounded-full bg-[#FFAA27]/10 px-4 py-1 text-sm font-medium text-[#FFAA27]">
             Découvrez Edu Dash
           </span>
 
-          <h2 className="mt-6 w-full text-3xl font-bold tracking-tight text-gray-900 lg:text-5xl">
+          <h2 className="mt-6 w-full text-2xl font-bold tracking-tight text-gray-900 lg:text-5xl">
             Une nouvelle façon de gérer votre école.
           </h2>
 
-          <p className="mt-6 text-lg leading-relaxed text-gray-600">
+          {/* Subtitle hidden on mobile to give screenshot room */}
+          <p className="mt-4 hidden text-lg leading-relaxed text-gray-600 md:block">
             Simple, moderne et pensée pour toute votre communauté éducative.
           </p>
         </div>
 
-        {/* Dashboard Screenshot */}
-        <div className="relative mx-auto mt-16 max-w-6xl">
+        {/* Dashboard Screenshot — near full-width on mobile */}
+        <div className="relative mx-auto mt-8 max-w-6xl lg:mt-16">
           {/* Glow */}
-          <div className="absolute -inset-6 rounded-[40px] bg-[#FFAA27]/5 blur-3xl" />
+          <div className="absolute -inset-6 hidden rounded-[40px] bg-[#FFAA27]/5 blur-3xl lg:block" />
 
           {/* Browser Frame */}
-          <div className="relative overflow-hidden rounded-[32px] border border-gray-200 bg-white shadow-[0_30px_80px_rgba(0,0,0,0.12)]">
+          <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-[0_15px_40px_rgba(0,0,0,0.10)] lg:rounded-[32px] lg:shadow-[0_30px_80px_rgba(0,0,0,0.12)]">
             {/* Browser Top */}
-            <div className="flex items-center gap-2 border-b border-gray-100 px-6 py-4">
-              <div className="h-3 w-3 rounded-full bg-red-300" />
-              <div className="h-3 w-3 rounded-full bg-yellow-300" />
-              <div className="h-3 w-3 rounded-full bg-green-300" />
+            <div className="flex items-center gap-2 border-b border-gray-100 px-4 py-2.5 lg:px-6 lg:py-4">
+              <div className="h-2.5 w-2.5 rounded-full bg-red-300 lg:h-3 lg:w-3" />
+              <div className="h-2.5 w-2.5 rounded-full bg-yellow-300 lg:h-3 lg:w-3" />
+              <div className="h-2.5 w-2.5 rounded-full bg-green-300 lg:h-3 lg:w-3" />
 
-              <div className="ml-4 rounded-full bg-gray-100 px-4 py-1 text-xs text-gray-500">
+              <div className="ml-4 rounded-full bg-gray-100 px-3 py-1 text-[10px] text-gray-500 lg:px-4 lg:text-xs">
                 app.edudash.ma
               </div>
             </div>
@@ -607,7 +718,7 @@ export function ProductPreview() {
         </div>
 
         {/* Features */}
-        <div className="mx-auto mt-16 grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto mt-10 grid max-w-6xl gap-4 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
           {features.map((feature, index) => (
             <div
               key={index}
@@ -624,17 +735,16 @@ export function ProductPreview() {
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-16 text-center">
-          <p className="mx-auto max-w-2xl text-gray-600">
+        {/* Bottom CTA — text hidden on mobile */}
+        <div className="mt-10 text-center lg:mt-16">
+          <p className="mx-auto hidden max-w-2xl text-gray-600 md:block">
             Découvrez comment Edu Dash peut transformer la gestion
             de votre établissement et renforcer la collaboration
             entre les équipes pédagogiques, les élèves et les familles.
           </p>
 
-          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-            <button
-            >
+          <div className="mt-0 flex flex-col justify-center gap-4 sm:flex-row md:mt-8">
+            <button>
               <a
                 href="https://wa.me/212765232205?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
                 target="_blank"
@@ -655,102 +765,109 @@ export function ProductPreview() {
         </div>
       </div>
 
-      {showDemoModal && (
-        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-          <div className="relative w-full max-w-4xl overflow-hidden rounded-[32px] bg-white shadow-[0_30px_80px_rgba(0,0,0,0.25)]">
-            {/* Close */}
-            <button
-              onClick={() => setShowDemoModal(false)}
-              className="absolute top-5 right-5 z-10 rounded-xl p-2 text-gray-500 transition hover:bg-gray-100 hover:text-gray-700"
-            >
-              <X className="h-5 w-5" />
-            </button>
+{showDemoModal && (
+  <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
+    
+    <div className="relative w-full max-w-4xl overflow-hidden rounded-2xl sm:rounded-[32px] bg-white shadow-[0_30px_80px_rgba(0,0,0,0.25)]">
 
-            <div className="grid lg:grid-cols-2">
-              {/* Left */}
-              <div className="p-8 lg:p-12">
-                <div className="inline-flex rounded-full bg-[#FFAA27]/10 px-4 py-1 text-sm font-medium text-[#FFAA27]">
-                  Démonstration Edu Dash
-                </div>
+      {/* Close */}
+      <button
+        onClick={() => setShowDemoModal(false)}
+        className="absolute top-4 right-4 sm:top-5 sm:right-5 z-10 rounded-xl p-2 text-gray-500 transition hover:bg-gray-100 hover:text-gray-700"
+      >
+        <X className="h-5 w-5" />
+      </button>
 
-                <h3 className="mt-6 text-3xl font-bold text-gray-900">
-                  Planifions une démonstration
-                </h3>
+      {/* Layout */}
+<div className="grid grid-cols-1 lg:grid-cols-2">
 
-                <p className="mt-5 leading-relaxed text-gray-600">
-                  Vous souhaitez découvrir Edu Dash en détail ?
-                  Contactez-nous afin d'organiser une démonstration
-                  personnalisée adaptée à votre établissement.
-                </p>
+  {/* LEFT CONTENT (always visible) */}
+  <div className="p-6 sm:p-8 lg:p-12">
 
-                <div className="mt-8 space-y-4">
-                  <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
-                    <p className="text-sm text-gray-500">
-                      Email
-                    </p>
+    <div className="inline-flex rounded-full bg-[#FFAA27]/10 px-4 py-1 text-xs sm:text-sm font-medium text-[#FFAA27]">
+      Démonstration Edu Dash
+    </div>
 
-                    <p className="font-semibold text-gray-900">
-                      contact@edudash.ma
-                    </p>
-                  </div>
+    <h3 className="mt-4 sm:mt-6 text-2xl sm:text-3xl font-bold text-gray-900">
+      Planifions une démonstration
+    </h3>
 
-                  <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
-                    <p className="text-sm text-gray-500">
-                      Téléphone
-                    </p>
+    <p className="mt-4 sm:mt-5 text-sm sm:text-base leading-relaxed text-gray-600">
+      Vous souhaitez découvrir Edu Dash en détail ?
+      Contactez-nous afin d'organiser une démonstration personnalisée adaptée à votre établissement.
+    </p>
 
-                    <p className="font-semibold text-gray-900">
-                      +212 765 23 22 05
-                    </p>
-                  </div>
-                </div>
+    <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
 
-                <button
-                  onClick={() => setShowDemoModal(false)}
-                  className="mt-8 rounded-xl border border-gray-200 px-6 py-3 font-medium text-gray-700 transition hover:bg-gray-50"
-                >
-                  Fermer
-                </button>
-              </div>
+      <div className="rounded-2xl border border-gray-100 bg-gray-50 p-3 sm:p-4">
+        <p className="text-xs sm:text-sm text-gray-500">Email</p>
+        <p className="font-semibold text-gray-900 text-sm sm:text-base">
+          contact@edudash.ma
+        </p>
+      </div>
 
-              {/* Right */}
-              <div className="flex items-center justify-center bg-gray-50 p-8 lg:p-12">
-                <div className="w-full max-w-sm">
-                  <a
-                    href={businessCardImage}
-                    download="Carte-de-visite-Edu-Dash.png"
-                    className="group block"
-                  >
-                    <div className="overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-xl transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl">
-                      <img
-                        src={businessCardImage}
-                        alt="Carte de visite Edu Dash"
-                        className="w-full transition duration-700 group-hover:scale-[1.03]"
-                      />
-                    </div>
+      <div className="rounded-2xl border border-gray-100 bg-gray-50 p-3 sm:p-4">
+        <p className="text-xs sm:text-sm text-gray-500">Téléphone</p>
+        <p className="font-semibold text-gray-900 text-sm sm:text-base">
+          +212 765 23 22 05
+        </p>
+      </div>
 
-                    <div className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-[#FFAA27] px-5 py-3 font-medium text-white transition group-hover:bg-[#f39a08]">
-                      <Download className="h-5 w-5" />
+    </div>
 
-                      Télécharger la carte
-                    </div>
-                  </a>
+    <button
+      onClick={() => setShowDemoModal(false)}
+      className="mt-6 sm:mt-8 w-full sm:w-auto rounded-xl border border-gray-200 px-6 py-3 font-medium text-gray-700 transition hover:bg-gray-50"
+    >
+      Fermer
+    </button>
 
-                  <p className="mt-4 text-center text-sm text-gray-500">
-                    Cliquez sur la carte pour la télécharger
-                    et retrouver facilement nos coordonnées.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+  </div>
+
+  {/* RIGHT SIDE (DESKTOP ONLY) */}
+  <div className="hidden lg:flex items-center justify-center bg-gray-50 p-12">
+
+    <div className="w-full max-w-sm">
+
+      <a
+        href={businessCardImage}
+        download="Carte-de-visite-Edu-Dash.png"
+        className="group block"
+      >
+        <div className="overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-xl transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl">
+          <img
+            src={businessCardImage}
+            alt="Carte de visite Edu Dash"
+            className="w-full transition duration-700 group-hover:scale-[1.03]"
+          />
         </div>
-      )}
+
+        <div className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-[#FFAA27] px-5 py-3 font-medium text-white transition group-hover:bg-[#f39a08]">
+          <Download className="h-5 w-5" />
+          Télécharger la carte
+        </div>
+      </a>
+
+      <p className="mt-4 text-center text-sm text-gray-500">
+        Cliquez sur la carte pour la télécharger
+        et retrouver facilement nos coordonnées.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+    </div>
+  </div>
+)}
     </section>
   );
 }
+
 export function WhoItsFor() {
   const [selected, setSelected] = useState(null);
+  const [openIndex, setOpenIndex] = useState(null);
 
   useEffect(() => {
     const esc = (e) => {
@@ -769,7 +886,6 @@ export function WhoItsFor() {
       title: "Vie scolaire",
       subtitle: "Le cœur de votre établissement.",
       icon: BookOpen,
-      popular: ["Générateur intelligent d'emplois du temps"],
       features: [
         "Inscriptions & pré-inscriptions en ligne",
         "Générateur intelligent d'emplois du temps",
@@ -788,7 +904,6 @@ export function WhoItsFor() {
       title: "Communication",
       subtitle: "Restez connecté.",
       icon: MessageSquare,
-      popular: ["Notifications ciblées par rôle"],
       features: [
         "Notifications ciblées par rôle",
         "Communication parents-école",
@@ -805,7 +920,6 @@ export function WhoItsFor() {
       title: "Finance",
       subtitle: "Visibilité financière.",
       icon: Wallet,
-      popular: ["Suivi des paiements"],
       features: [
         "Facturation automatisée",
         "Suivi des paiements",
@@ -823,7 +937,6 @@ export function WhoItsFor() {
       title: "Pédagogie",
       subtitle: "Pour la réussite.",
       icon: MonitorSmartphone,
-      popular: ["Compétences & badges"],
       features: [
         "Notes & évaluations",
         "Cahier de textes",
@@ -840,7 +953,6 @@ export function WhoItsFor() {
       title: "Services",
       subtitle: "Au-delà de la classe.",
       icon: Briefcase,
-      popular: ["Sorties scolaires"],
       features: [
         "Transport scolaire",
         "Cantine",
@@ -856,7 +968,6 @@ export function WhoItsFor() {
       title: "Administration",
       subtitle: "Pilotez sereinement.",
       icon: ShieldCheck,
-      popular: ["Archivage annuel"],
       features: [
         "Rôles & permissions",
         "KPI décisionnels",
@@ -873,9 +984,9 @@ export function WhoItsFor() {
   ];
 
   return (
-    <section className="bg-white py-24 relative overflow-hidden">
+    <section className="bg-white py-16 relative overflow-hidden lg:py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-16">
           <span className="inline-flex rounded-full bg-[#FFAA27]/10 px-4 py-1 text-sm font-medium text-[#FFAA27]">
             Tout-en-un
           </span>
@@ -887,7 +998,46 @@ export function WhoItsFor() {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {/* Mobile: accordion */}
+        <div className="flex flex-col gap-3 md:hidden">
+          {modules.map((module, idx) => {
+            const Icon = module.icon;
+            const isOpen = openIndex === idx;
+            return (
+              <div key={module.title} className="rounded-2xl border border-gray-100 bg-white overflow-hidden">
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : idx)}
+                  className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-[#FFAA27]/10 text-[#FFAA27]">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <span className="text-base font-semibold text-gray-900">{module.title}</span>
+                  </div>
+                  <ChevronDown className={`h-4 w-4 flex-shrink-0 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {isOpen && (
+                  <div className="border-t border-gray-100 px-5 py-4">
+                    <p className="mb-3 text-xs text-gray-400">{module.subtitle}</p>
+                    <div className="space-y-2">
+                      {[...module.features, ...module.extras].map((f) => (
+                        <div key={f} className="flex items-start gap-2 text-sm text-gray-600">
+                          <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#FFAA27]" />
+                          {f}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Desktop: original grid + modal */}
+        <div className="hidden gap-6 md:grid md:grid-cols-2 xl:grid-cols-3">
           {modules.map((module) => {
             const Icon = module.icon;
             return (
@@ -975,26 +1125,22 @@ export function ComparisonSection() {
   ];
 
   return (
-    <section className="relative overflow-hidden py-24">
-      {/* Background glow */}
+    <section className="relative overflow-hidden py-16 lg:py-24">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-1/3 left-[-100px] h-[300px] w-[300px] rounded-full bg-[#FFAA27]/10 blur-3xl" />
         <div className="absolute right-[-120px] bottom-0 h-[320px] w-[320px] rounded-full bg-[#FFAA27]/10 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6">
-        {/* Header */}
-        <div className="mb-16 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-gray-900 lg:text-5xl">EDU Dash vs les solutions traditionnelles</h2>
-          <p className="mx-auto max-w-2xl text-gray-600 lg:text-lg">
+        <div className="mb-12 text-center lg:mb-16">
+          <h2 className="mb-4 text-2xl font-bold text-gray-900 lg:text-5xl">EDU Dash vs les solutions traditionnelles</h2>
+          <p className="mx-auto max-w-2xl text-sm text-gray-600 lg:text-lg">
             Arrêtez les systèmes compliqués. Passez à une gestion moderne, simple et efficace.
           </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid gap-8 lg:grid-cols-2">
-          {/* ❌ Others */}
-          <div className="group relative rounded-3xl border border-gray-200 bg-white p-8 shadow-sm transition-all duration-500 hover:shadow-xl">
+        <div className="grid gap-8 grid-cols-1 lg:grid-cols-2">
+          <div className="group relative rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-500 hover:shadow-xl lg:p-8">
             <div className="mb-6 flex items-center gap-3">
               <XCircle className="h-7 w-7 text-gray-400" />
               <h3 className="text-xl font-semibold text-gray-800">Autres solutions</h3>
@@ -1010,9 +1156,7 @@ export function ComparisonSection() {
             </ul>
           </div>
 
-          {/* ✅ EDU DASH */}
-          <div className="group relative rounded-3xl border-2 border-[#FFAA27] bg-white p-8 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
-            {/* Badge */}
+          <div className="group relative rounded-3xl border-2 border-[#FFAA27] bg-white p-6 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl lg:p-8">
             <span className="absolute -top-4 left-6 rounded-full bg-[#FFAA27] px-4 py-1 text-xs font-semibold text-white shadow">
               Recommandé
             </span>
@@ -1031,26 +1175,14 @@ export function ComparisonSection() {
               ))}
             </ul>
 
-            {/* Glow hover */}
             <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br from-[#FFAA27]/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           </div>
         </div>
 
-        {/* Bottom highlight */}
-        <div className="mt-16 text-center">
-          <p className="mx-auto max-w-2xl text-lg font-medium text-gray-800">
-            Avec EDU Dash, vous ne changez pas seulement de logiciel — vous améliorez toute l’organisation de votre école.
+        <div className="mt-12 text-center lg:mt-16">
+          <p className="mx-auto max-w-2xl text-base font-medium text-gray-800 lg:text-lg">
+            Avec EDU Dash, vous ne changez pas seulement de logiciel — vous améliorez toute l'organisation de votre école.
           </p>
-
-          {/* CTA */}
-          {/* <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <button className="rounded-xl bg-[#FFAA27] px-6 py-3 font-semibold text-white shadow-md transition hover:scale-105 hover:shadow-lg">
-              Réserver une démo
-            </button>
-            <button className="rounded-xl border border-gray-300 px-6 py-3 font-semibold text-gray-700 transition hover:bg-gray-100">
-              Voir EDU Dash en action
-            </button>
-          </div> */}
         </div>
       </div>
     </section>
@@ -1103,11 +1235,19 @@ export function TrustSection() {
     <section ref={sectionRef} className="relative overflow-hidden py-20">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         {/* Badge */}
-        <div className="mb-6 flex justify-center">
-          <span className="rounded-full bg-[#FFAA27]/10 px-4 py-1 text-sm font-medium text-[#FFAA27]">
-            Déjà adopté par des établissements qui nous font confiance
-          </span>
-        </div>
+<div className="mb-6 flex justify-center">
+  
+  {/* Mobile version */}
+  <span className="sm:hidden inline-flex rounded-full bg-[#FFAA27]/10 px-4 py-2 text-xs font-medium text-[#FFAA27] text-center">
+    Déjà adopté par des établissements
+  </span>
+
+  {/* Desktop version (unchanged) */}
+  <span className="hidden sm:inline-flex rounded-full bg-[#FFAA27]/10 px-4 py-1 text-sm font-medium text-[#FFAA27] text-center">
+    Déjà adopté par des établissements qui nous font confiance
+  </span>
+
+</div>
 
         {/* Header */}
         <div className="mx-auto mb-16 max-w-3xl text-center">
@@ -1276,48 +1416,85 @@ const testimonials = [
   },
 ];
 
+function TestimonialCard({ t }) {
+  return (
+    <div className="group relative flex flex-col justify-between rounded-3xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+      <div className="mb-4 flex gap-1">
+        {[...Array(5)].map((_, s) => (
+          <span key={s} className="text-[#FFAA27] text-sm">★</span>
+        ))}
+      </div>
+
+      <p className="flex-1 text-base leading-relaxed text-gray-700">"{t.quote}"</p>
+
+      <div className="my-6 h-px bg-gray-100" />
+
+      <div className="flex items-center gap-3">
+        <div className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-sm font-semibold ${t.color}`}>
+          {t.initials}
+        </div>
+        <div>
+          <p className="text-sm font-semibold text-gray-900 text-left">{t.name}</p>
+          <p className="text-xs text-gray-400 text-left">{t.role}</p>
+          <p className="text-xs font-medium text-[#FFAA27]">{t.school}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Témoignages() {
+  const [index, setIndex] = useState(0);
+
+  const prev = () => setIndex((i) => (i === 0 ? testimonials.length - 1 : i - 1));
+  const next = () => setIndex((i) => (i === testimonials.length - 1 ? 0 : i + 1));
+
   return (
     <section id="témoignages" className="relative overflow-hidden bg-white py-16 lg:py-28 dark:bg-gray-900">
       <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
-        {/* Header */}
         <h2 className="mb-4 text-2xl font-bold text-gray-900 lg:text-4xl dark:text-gray-100">Témoignages & Avis</h2>
         <p className="mx-auto max-w-2xl text-sm text-gray-600 lg:text-lg dark:text-gray-300">
-          Découvrez ce que disent les utilisateurs d’<strong className="dark:text-gray-100">EDU Dash</strong>.
+          Découvrez ce que disent les utilisateurs d'<strong className="dark:text-gray-100">EDU Dash</strong>.
         </p>
 
-        {/* Testimonials grid */}
-        <div className="mt-16 grid gap-8 md:grid-cols-3">
-          {testimonials.slice(0, 3).map((t, i) => (
-            <div
-              key={i}
-              className="group relative flex flex-col justify-between rounded-3xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+        {/* Mobile: carousel, one card at a time */}
+        <div className="mt-10 md:hidden">
+          <TestimonialCard t={testimonials[index]} />
+
+          <div className="mt-6 flex items-center justify-center gap-4">
+            <button
+              onClick={prev}
+              aria-label="Témoignage précédent"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition hover:bg-gray-50"
             >
-              {/* Stars */}
-              <div className="mb-4 flex gap-1">
-                {[...Array(5)].map((_, s) => (
-                  <span key={s} className="text-[#FFAA27] text-sm">★</span>
-                ))}
-              </div>
+              <ArrowRight className="h-4 w-4 rotate-180" />
+            </button>
 
-              {/* Quote */}
-              <p className="flex-1 text-base leading-relaxed text-gray-700">"{t.quote}"</p>
-
-              {/* Divider */}
-              <div className="my-6 h-px bg-gray-100" />
-
-              {/* Author */}
-              <div className="flex items-center gap-3">
-                <div className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-sm font-semibold ${t.color}`}>
-                  {t.initials}
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-gray-900 text-left">{t.name}</p>
-                  <p className="text-xs text-gray-400 text-left">{t.role}</p>
-                  <p className="text-xs font-medium text-[#FFAA27]">{t.school}</p>
-                </div>
-              </div>
+            <div className="flex gap-2">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setIndex(i)}
+                  aria-label={`Aller au témoignage ${i + 1}`}
+                  className={`h-2 w-2 rounded-full transition-all ${i === index ? 'w-6 bg-[#FFAA27]' : 'bg-gray-300'}`}
+                />
+              ))}
             </div>
+
+            <button
+              onClick={next}
+              aria-label="Témoignage suivant"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition hover:bg-gray-50"
+            >
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Desktop: 3-column grid */}
+        <div className="mt-16 hidden gap-8 md:grid md:grid-cols-3">
+          {testimonials.slice(0, 3).map((t, i) => (
+            <TestimonialCard key={i} t={t} />
           ))}
         </div>
       </div>
@@ -1325,49 +1502,8 @@ export function Témoignages() {
   );
 }
 
+
 export function ContactSection() {
-  const [contact, setContact] = useState({ name: '', email: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState('idle');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [fieldErrors, setFieldErrors] = useState({});
-  const MESSAGE_LIMIT = 1000;
-
-  const handleContactChange = (e) => {
-    const { name, value } = e.target;
-    setContact((s) => ({ ...s, [name]: value }));
-    setFieldErrors((s) => ({ ...s, [name]: '' }));
-  };
-
-  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-  const handleContactSubmit = (e) => {
-    e.preventDefault();
-    setStatus('idle');
-    setErrorMessage('');
-    const errors = {};
-    if (!contact.name.trim()) errors.name = 'Le nom est requis.';
-    if (!contact.email.trim()) errors.email = "L'email est requis.";
-    else if (!validateEmail(contact.email)) errors.email = "L'email fourni est invalide.";
-    if (!contact.message.trim()) errors.message = 'Le message est requis.';
-    else if (contact.message.length > MESSAGE_LIMIT) errors.message = `Le message dépasse la limite de ${MESSAGE_LIMIT} caractères.`;
-
-    if (Object.keys(errors).length) {
-      setFieldErrors(errors);
-      setStatus('error');
-      setErrorMessage('Veuillez corriger les champs indiqués.');
-      return;
-    }
-
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setStatus('success');
-      setContact({ name: '', email: '', message: '' });
-      setFieldErrors({});
-    }, 700);
-  };
-
   return (
     <section id="contact" className="bg-white py-20">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
@@ -1378,13 +1514,84 @@ export function ContactSection() {
           </h2>
           <div className="mx-auto mb-4 hidden h-1 w-24 rounded-full bg-[#FFAA27] lg:flex"></div>
           <p className="mx-auto max-w-2xl text-sm text-gray-600 lg:text-lg">
-            Une question, un partenariat, ou un besoin d’assistance ? N’hésitez pas à nous écrire nous serons ravis de vous répondre.
+            Une question, un partenariat, ou un besoin d'assistance ? N'hésitez pas à nous écrire nous serons ravis de vous répondre.
           </p>
         </div>
 
-        {/* Row Layout */}
-        <div className="flex flex-col gap-10 md:flex-row md:gap-16">
-          {/* Left: Contact Info */}
+        {/* Mobile: WhatsApp first, then email, then address */}
+        <div className="flex flex-col gap-4 md:hidden">
+          <a
+            href="https://wa.me/212765232205?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-4 rounded-2xl border border-green-200 bg-green-50 px-5 py-5 transition-all duration-300 hover:border-green-300 hover:bg-green-100"
+          >
+            <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl bg-green-500 text-white shadow-md">
+              <FaWhatsapp className="h-7 w-7" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-green-700">Réponse rapide</p>
+              <h4 className="text-lg font-bold text-gray-900">Demander une démo WhatsApp</h4>
+              <p className="text-sm text-gray-600">Échangez directement avec notre équipe</p>
+            </div>
+          </a>
+
+          <div className="flex items-center gap-4 rounded-2xl border border-gray-100 bg-gray-50 px-5 py-4">
+            <div className="rounded-full bg-[#FFAA27]/10 p-3 text-[#FFAA27]">
+              <Mail size={20} />
+            </div>
+            <div>
+              <p className="font-semibold text-gray-900">E-mail</p>
+              <p className="text-gray-600">contact@edudash.ma</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 rounded-2xl border border-gray-100 bg-gray-50 px-5 py-4">
+            <div className="rounded-full bg-[#FFAA27]/10 p-3 text-[#FFAA27]">
+              <MapPin size={20} />
+            </div>
+            <div>
+              <p className="font-semibold text-gray-900">Adresse</p>
+              <p className="text-gray-600">Casablanca, Maroc</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 rounded-2xl border border-gray-100 bg-gray-50 px-5 py-4">
+            <div className="rounded-full bg-[#FFAA27]/10 p-3 text-[#FFAA27]">
+              <Phone size={20} />
+            </div>
+            <div>
+              <p className="font-semibold text-gray-900">Téléphone</p>
+              <p className="text-gray-600">+212 765 23 22 05</p>
+            </div>
+          </div>
+
+          {/* Business card download */}
+          <a
+            href={businessCardImage}
+            download="Carte-de-visite-Edu-Dash.png"
+            className="group block"
+          >
+            <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md transition-all duration-500">
+              <img
+                src={businessCardImage}
+                alt="Carte de visite Edu Dash"
+                className="w-full"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent p-4">
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-white/80">Cliquez pour télécharger</p>
+                  <div className="rounded-full bg-white/20 p-2 backdrop-blur-md">
+                    <Download className="h-4 w-4 text-white" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        {/* Desktop: original row layout */}
+        <div className="hidden flex-col gap-10 md:flex md:flex-row md:gap-16">
           <div className="p-8 lg:flex-1">
             <h3 className="mb-6 text-2xl font-semibold text-gray-900">Informations de contact</h3>
 
@@ -1395,7 +1602,7 @@ export function ContactSection() {
                 </div>
                 <div>
                   <p className="font-semibold">E-mail</p>
-                  <p className="text-gray-600">edudashma@gmail.com</p>
+                  <p className="text-gray-600">contact@edudash.ma</p>
                 </div>
               </li>
               <li className="flex items-start gap-4">
@@ -1418,8 +1625,6 @@ export function ContactSection() {
               </li>
             </ul>
 
-            {/* Replace Social Section */}
-            {/* WhatsApp CTA */}
             <div className="mt-8">
               <a
                 href="https://wa.me/212765232205?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
@@ -1432,23 +1637,14 @@ export function ContactSection() {
                 </div>
 
                 <div>
-                  <p className="text-sm font-medium text-green-700">
-                    Réponse rapide
-                  </p>
-
-                  <h4 className="text-xl font-bold text-gray-900">
-                    Demander une démo WhatsApp
-                  </h4>
-
-                  <p className="text-sm text-gray-600">
-                    Échangez directement avec notre équipe
-                  </p>
+                  <p className="text-sm font-medium text-green-700">Réponse rapide</p>
+                  <h4 className="text-xl font-bold text-gray-900">Demander une démo WhatsApp</h4>
+                  <p className="text-sm text-gray-600">Échangez directement avec notre équipe</p>
                 </div>
               </a>
             </div>
           </div>
 
-          {/* Right: Business Card */}
           <div className="flex-[1.3] flex items-center justify-center px-4 lg:p-8">
             <div className="w-full max-w-lg">
               <a
@@ -1457,24 +1653,16 @@ export function ContactSection() {
                 className="group block"
               >
                 <div className="relative overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.12)] transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_30px_80px_rgba(0,0,0,0.18)]">
-                  {/* Business Card */}
                   <img
                     src={businessCardImage}
                     alt="Carte de visite Edu Dash"
                     className="w-full transition-transform duration-700 group-hover:scale-[1.03]"
                   />
 
-                  {/* Overlay */}
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent p-6">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm text-white/80">
-                          Cliquez pour télécharger
-                        </p>
-
-                        {/* <h4 className="mt-1 text-lg font-semibold text-white">
-                                                    Carte de visite Edu Dash
-                                                </h4> */}
+                        <p className="text-sm text-white/80">Cliquez pour télécharger</p>
                       </div>
 
                       <div className="rounded-full bg-white/20 p-3 backdrop-blur-md transition group-hover:bg-[#FFAA27]">
@@ -1485,7 +1673,6 @@ export function ContactSection() {
                 </div>
               </a>
 
-              {/* Small Note */}
               <p className="mt-5 text-center text-sm text-gray-500">
                 Téléchargez notre carte de visite pour retrouver facilement nos coordonnées.
               </p>
@@ -1531,84 +1718,144 @@ export function FinalCTA() {
 }
 
 export function Footer() {
+  const [openSection, setOpenSection] = useState(null);
+
+  const toggle = (key) => setOpenSection((cur) => (cur === key ? null : key));
+
   return (
-    <footer className="border-t border-gray-200 bg-white py-16 text-black">
-      <div className="mx-auto flex max-w-7xl flex-col justify-between gap-12 px-6 md:flex-row md:px-12">
-        {/* Logo & Description */}
-        <div className="flex-1 md:flex-none">
+    <footer className="border-t border-gray-200 bg-white py-12 text-black lg:py-16">
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
+        {/* Logo & Description — always visible */}
+        <div className="mb-8 md:mb-0">
           <img src={logo} alt="EduDash Logo" className="mb-4 h-12" />
           <p className="max-w-sm text-sm leading-relaxed text-gray-600">
             EduDash est une plateforme de gestion scolaire intuitive et complète pour moderniser la vie éducative.
           </p>
         </div>
 
-        {/* Useful Links */}
-        <div className="flex-1">
-          <h3 className="mb-4 text-lg font-semibold">Liens utiles</h3>
-          <ul className="space-y-2 text-sm">
-            <li>
-              <a href="#accueil" className="transition-colors duration-300 hover:text-[#FFAA27]">
-                Accueil
-              </a>
-            </li>
-            <li>
-              <a href="#apropos" className="transition-colors duration-300 hover:text-[#FFAA27]">
-                À propos
-              </a>
-            </li>
-            <li>
-              <a href="#fonctionnalites" className="transition-colors duration-300 hover:text-[#FFAA27]">
-                Fonctionnalités
-              </a>
-            </li>
-            <li>
-              <a href="/soon" className="transition-colors duration-300 hover:text-[#FFAA27]">
-                Démo
-              </a>
-            </li>
-            <li>
-              <a href="#contact" className="transition-colors duration-300 hover:text-[#FFAA27]">
-                Contact
-              </a>
-            </li>
-          </ul>
+        {/* Mobile: accordion sections */}
+        <div className="flex flex-col md:hidden">
+          {/* Liens utiles */}
+          <div className="border-b border-gray-100">
+            <button
+              onClick={() => toggle('liens')}
+              className="flex w-full items-center justify-between py-4 text-left text-base font-semibold"
+            >
+              Liens utiles
+              <ChevronDown className={`h-4 w-4 text-gray-400 transition-transform ${openSection === 'liens' ? 'rotate-180' : ''}`} />
+            </button>
+            {openSection === 'liens' && (
+              <ul className="space-y-2 pb-4 text-sm">
+                <li><a href="#accueil" className="transition-colors hover:text-[#FFAA27]">Accueil</a></li>
+                <li><a href="#apropos" className="transition-colors hover:text-[#FFAA27]">À propos</a></li>
+                <li><a href="#fonctionnalites" className="transition-colors hover:text-[#FFAA27]">Fonctionnalités</a></li>
+                <li><a href="/soon" className="transition-colors hover:text-[#FFAA27]">Démo</a></li>
+                <li><a href="#contact" className="transition-colors hover:text-[#FFAA27]">Contact</a></li>
+              </ul>
+            )}
+          </div>
+
+          {/* Contact */}
+          <div className="border-b border-gray-100">
+            <button
+              onClick={() => toggle('contact')}
+              className="flex w-full items-center justify-between py-4 text-left text-base font-semibold"
+            >
+              Contact
+              <ChevronDown className={`h-4 w-4 text-gray-400 transition-transform ${openSection === 'contact' ? 'rotate-180' : ''}`} />
+            </button>
+            {openSection === 'contact' && (
+              <ul className="space-y-2 pb-4 text-sm text-gray-600">
+                <li>
+                  Email :{' '}
+                  <a href="mailto:contact@edudash.com" className="transition-colors hover:text-[#FFAA27]">
+                    contact@edudash.com
+                  </a>
+                </li>
+                <li className="flex gap-1">
+                  <p>Localisation :</p>
+                  <p className="transition-colors hover:text-[#FFAA27]">Casablanca, Maroc</p>
+                </li>
+              </ul>
+            )}
+          </div>
+
+          {/* Newsletter */}
+          <div className="border-b border-gray-100">
+            <button
+              onClick={() => toggle('newsletter')}
+              className="flex w-full items-center justify-between py-4 text-left text-base font-semibold"
+            >
+              Newsletter
+              <ChevronDown className={`h-4 w-4 text-gray-400 transition-transform ${openSection === 'newsletter' ? 'rotate-180' : ''}`} />
+            </button>
+            {openSection === 'newsletter' && (
+              <div className="pb-4">
+                <form className="flex overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+                  <input
+                    type="email"
+                    placeholder="Votre email"
+                    className="flex-1 min-w-0 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:outline-none"
+                  />
+                  <button
+                    type="submit"
+                    className="flex-shrink-0 bg-[#FFAA27] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-500"
+                  >
+                    S'inscrire
+                  </button>
+                </form>
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Contact / Newsletter */}
-        <div className="flex-1">
-          <h3 className="mb-4 text-lg font-semibold">Contactez-nous</h3>
-          <ul className="space-y-2 text-sm text-gray-600">
-            <li>
-              Email :{' '}
-              <a href="mailto:contact@edudash.com" className="transition-colors hover:text-[#FFAA27]">
-                contact@edudash.com
-              </a>
-            </li>
-            <li className="flex gap-1">
-              <p>Localisation :</p>
-              <p className="transition-colors hover:text-[#FFAA27]"> Casablanca , Maroc</p>
-            </li>
-          </ul>
+        {/* Desktop: original 3-column layout */}
+        <div className="hidden md:flex md:gap-16">
+          <div className="flex-1">
+            <h3 className="mb-4 text-lg font-semibold">Liens utiles</h3>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#accueil" className="transition-colors duration-300 hover:text-[#FFAA27]">Accueil</a></li>
+              <li><a href="#apropos" className="transition-colors duration-300 hover:text-[#FFAA27]">À propos</a></li>
+              <li><a href="#fonctionnalites" className="transition-colors duration-300 hover:text-[#FFAA27]">Fonctionnalités</a></li>
+              <li><a href="/soon" className="transition-colors duration-300 hover:text-[#FFAA27]">Démo</a></li>
+              <li><a href="#contact" className="transition-colors duration-300 hover:text-[#FFAA27]">Contact</a></li>
+            </ul>
+          </div>
 
-          <h3 className="mt-6 mb-2 text-lg font-semibold">Newsletter</h3>
-          <form className="mt-2 flex overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
-            <input
-              type="email"
-              placeholder="Votre email"
-              className="flex-1 min-w-0 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:outline-none"
-            />
-            <button
-              type="submit"
-              className="flex-shrink-0 bg-[#FFAA27] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-500"
-            >
-              S'inscrire
-            </button>
-          </form>
+          <div className="flex-1">
+            <h3 className="mb-4 text-lg font-semibold">Contactez-nous</h3>
+            <ul className="space-y-2 text-sm text-gray-600">
+              <li>
+                Email :{' '}
+                <a href="mailto:contact@edudash.com" className="transition-colors hover:text-[#FFAA27]">
+                  contact@edudash.com
+                </a>
+              </li>
+              <li className="flex gap-1">
+                <p>Localisation :</p>
+                <p className="transition-colors hover:text-[#FFAA27]"> Casablanca , Maroc</p>
+              </li>
+            </ul>
+
+            <h3 className="mt-6 mb-2 text-lg font-semibold">Newsletter</h3>
+            <form className="mt-2 flex overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+              <input
+                type="email"
+                placeholder="Votre email"
+                className="flex-1 min-w-0 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:outline-none"
+              />
+              <button
+                type="submit"
+                className="flex-shrink-0 bg-[#FFAA27] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-500"
+              >
+                S'inscrire
+              </button>
+            </form>
+          </div>
         </div>
       </div>
 
-      {/* Bottom Copyright */}
-      <div className="mt-12 border-t border-gray-100 pt-6 text-center text-sm text-gray-500">
+      <div className="mt-10 border-t border-gray-100 pt-6 text-center text-sm text-gray-500 lg:mt-12">
         © {new Date().getFullYear()} EduDash. Tous droits réservés.
       </div>
     </footer>
