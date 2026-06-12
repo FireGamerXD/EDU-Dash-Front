@@ -3,8 +3,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../utils/imgs/edu_dash_logo.png";
 import illustration from "../../utils/imgs/Login-amico.png";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import { Eye, EyeOff, LogIn } from "lucide-react";
 
 export const LoginPage = () => {
@@ -19,34 +17,19 @@ export const LoginPage = () => {
     setTimeout(() => setIsLoading(false), 1500);
   };
 
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      easing: "ease-in-out",
-    });
-  }, []);
-
   return (
-    <section className="min-h-screen flex flex-col  md:flex-row bg-white relative overflow-hidden">
+    <section className="min-h-screen flex flex-col md:flex-row bg-white relative overflow-hidden">
       {/* Left Illustration */}
-      <motion.div
-        data-aos="fade-right"
-        className="hidden lg:flex w-full md:w-1/2 bg-[#FFA500] text-white flex-col justify-center items-center p-8 overflow-hidden"
-      >
+      <div className="hidden lg:flex w-full md:w-1/2 bg-[#FFA500] text-white flex-col justify-center items-center p-8 overflow-hidden">
         <img
           src={illustration}
           alt="Login Illustration"
-          className="w-[90%] max-w-md opacity-95 drop-shadow-2xl animate-fade-in"
+          className="w-[90%] max-w-md opacity-95 drop-shadow-2xl"
         />
-      </motion.div>
+      </div>
 
       {/* Right Form */}
-      <motion.div
-        data-aos="fade-left"
-        className="w-full md:w-1/2 flex items-center justify-center relative overflow-hidden"
-      >
-
+      <div className="w-full md:w-1/2 flex items-center justify-center relative overflow-hidden">
         <div className="z-10 w-full max-w-md sm:max-w-lg px-6 sm:px-10 py-12 sm:py-16">
           {/* Logo */}
           <div className="flex justify-center mb-10 sm:mb-12">
@@ -125,7 +108,7 @@ export const LoginPage = () => {
             © {new Date().getFullYear()} EduDash — Espace étudiant
           </p>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

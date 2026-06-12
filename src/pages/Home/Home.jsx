@@ -1,28 +1,56 @@
 import {
+  ArrowRight,
   ArrowUpRight,
   BarChart3,
+  Bell,
+  BookOpen,
+  Briefcase,
   Building2,
+  Check,
+  CheckCircle2,
   ChevronDown,
   Clock,
+  Clock3,
+  CreditCard,
+  Database,
+  Download,
+  Eye,
   FileDown,
   Globe2,
   GraduationCap,
+  Headphones,
+  HeadphonesIcon,
   Layers,
+  Layers3,
+  LayoutDashboard,
   Mail,
   MapPin,
+  MapPinned,
   MessageCircle,
   MessageSquare,
+  MonitorSmartphone,
+  Phone,
+  Rocket,
   Shield,
   ShieldCheck,
   ShieldCheckIcon,
   Smile,
+  Upload,
   User,
   Users,
   Users2,
+  Wallet,
+  X,
+  XCircle,
 } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
-import ExamsBro from "../../utils/imgs/college project-amico.svg"
-import logo from '../../utils/imgs/edu_dash_logo.png'
+import { useEffect, useRef, useState } from "react";
+import ExamsBro from "../../utils/imgs/college project-amico.svg";
+import logo from '../../utils/imgs/edu_dash_logo.png';
+import dashboardPreview from "../../utils/imgs/directeur_dashboard_view.png";
+import businessCardImage from "../../utils/imgs/CarteVisite.png";
+import flyerImage from "../../utils/imgs/Flyer.png";
+import herosectionImage from "../../utils/imgs/edudash_hero_v5.png";
+import { FaWhatsapp } from "react-icons/fa";
 // const ExamsBro = "/college project-amico.svg";
 // const logo = "/edu_dash_logo.png";
 
@@ -32,84 +60,74 @@ export const NavBar = () => {
 
   return (
     <nav className="sticky top-0 z-50 flex h-[80px] w-full items-center bg-white px-4 md:px-8">
-      <div className="flex lg:w-[24%] lg:min-w-[160px] items-center">
+      {/* Logo — DO NOT TOUCH */}
+      <div className="flex items-center lg:w-[24%] lg:min-w-[160px]">
         <a href="/">
-          <img src={logo} className="w-44 lg:h-12 lg:w-54" alt="EduDash Logo" />
+          <img src={logo} className="w-50 lg:h-12 lg:w-54" alt="EduDash Logo" />
         </a>
       </div>
 
+      {/* Desktop Navigation — DO NOT TOUCH */}
       <div className="text-md hidden flex-1 justify-center gap-8 md:flex">
         {[
-          ["Accueil", "#accueil"],
-          ["À propos", "#apropos"],
-          ["Fonctionnalités", "#fonctionnalites"],
-          ["Témoignages", "#Témoignages"],
-          ["Contact", "#contact"],
+          ['Accueil', '#accueil'],
+          ['À propos', '#apropos'],
+          ['Fonctionnalités', '#fonctionnalites'],
+          ['Témoignages', '#Témoignages'],
+          ['Contact', '#contact'],
         ].map(([label, href]) => (
           <a
             key={label}
             href={href}
-            className="relative text-gray-700 transition-colors duration-200
-            after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0
-            after:bg-[#ffa500] after:transition-all after:duration-300
-            hover:text-[#ffa500] hover:after:w-full"
+            className="relative text-gray-700 transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-[#ffa500] after:transition-all after:duration-300 hover:text-[#ffa500] hover:after:w-full"
           >
             {label}
           </a>
         ))}
       </div>
 
+      {/* Desktop CTA — DO NOT TOUCH */}
       <div className="ml-6 hidden items-center md:flex">
-        <a
-          href="/student/login"
-          className="rounded-lg bg-[#FFAA27] px-4 py-2 font-medium text-white hover:bg-orange-500"
-        >
+        <a href="/login" className="rounded-lg bg-[#FFAA27] px-4 py-2 font-medium text-white transition hover:bg-orange-500">
           Se Connecter
         </a>
       </div>
 
+      {/* Mobile Burger */}
       <div className="ml-auto flex items-center md:hidden">
-        <button
-          onClick={() => setMenuOpen(true)}
-          className="text-3xl text-[#ffa500]"
-        >
+        <button onClick={() => setMenuOpen(true)} className="text-3xl text-[#ffa500]" aria-label="Ouvrir le menu">
           &#9776;
         </button>
       </div>
 
+      {/* ================= MOBILE SIDEBAR ================= */}
       {menuOpen && (
         <>
-          <div
-            className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm"
-            onClick={() => setMenuOpen(false)}
-          />
-          <div
-            className="fixed left-0 top-0 z-50 h-full w-64 bg-white shadow-xl"
-            style={{ animation: "slideIn 0.3s ease forwards" }}
-          >
+          {/* Overlay */}
+          <div className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm" onClick={() => setMenuOpen(false)} />
+
+          {/* Sidebar */}
+          <div className="fixed top-0 left-0 z-50 h-full w-64 bg-white shadow-xl" style={{ animation: 'slideIn 0.3s ease forwards' }}>
+            {/* Logo */}
             <div className="flex justify-center py-6">
               <img src={logo} className="h-10" alt="EduDash Logo" />
             </div>
 
+            {/* Links */}
             <div className="flex flex-col gap-6 px-6 py-6">
               {[
-                ["Accueil", "#accueil"],
-                ["À propos", "#apropos"],
-                ["Témoignages", "#Témoignages"],
-                ["Contact", "#contact"],
+                ['Accueil', '#accueil'],
+                ['À propos', '#apropos'],
+                ['Témoignages', '#Témoignages'],
+                ['Contact', '#contact'],
               ].map(([label, href]) => (
-                <a
-                  key={label}
-                  href={href}
-                  className="text-lg text-gray-700 hover:text-[#ffa500]"
-                  onClick={() => setMenuOpen(false)}
-                >
+                <a key={label} href={href} className="text-lg text-gray-700 hover:text-[#ffa500]" onClick={() => setMenuOpen(false)}>
                   {label}
                 </a>
               ))}
 
               <a
-                href="/student/login"
+                href="/login"
                 className="mt-4 rounded-lg bg-[#FFAA27] px-6 py-2 text-center font-semibold text-white hover:bg-amber-600"
                 onClick={() => setMenuOpen(false)}
               >
@@ -120,34 +138,35 @@ export const NavBar = () => {
         </>
       )}
 
-      <style>{`
-        @keyframes slideIn {
-          from { transform: translateX(-100%); }
-          to { transform: translateX(0); }
-        }
-      `}</style>
+      {/* Animation */}
+      <style>
+        {`
+          @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+          }
+        `}
+      </style>
     </nav>
   );
 };
 
-/* ================= COUNT UP ================= */
-function CountUp({ end = 0, duration = 2800, suffix = "", start = true }) {
+function CountUp({ end = 0, duration = 2800, suffix = '', start = true }) {
   const [value, setValue] = useState(0);
   const rafRef = useRef(null);
   const startRef = useRef(null);
 
   useEffect(() => {
     if (!start) return;
-
-    startRef.current = performance.now();
+    const startTime = performance.now();
+    startRef.current = startTime;
 
     const tick = (now) => {
-      const elapsed = now - startRef.current;
+      const elapsed = now - (startRef.current || 0);
       const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 2);
+      const eased = 1 - Math.pow(1 - progress, 2); // ease-out quad
       const current = Math.floor(end * eased);
       setValue(current);
-
       if (progress < 1) {
         rafRef.current = requestAnimationFrame(tick);
       } else {
@@ -156,80 +175,97 @@ function CountUp({ end = 0, duration = 2800, suffix = "", start = true }) {
     };
 
     rafRef.current = requestAnimationFrame(tick);
-    return () => rafRef.current && cancelAnimationFrame(rafRef.current);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, [end, duration, start]);
 
+  const formatted = new Intl.NumberFormat('en-US').format(value);
   return (
     <>
-      {new Intl.NumberFormat("en-US").format(value)}
+      {formatted}
       {suffix}
     </>
   );
 }
 
-/* ================= HERO ================= */
 export function HeroSection() {
   return (
     <section
-      className="relative z-10 overflow-hidden bg-gradient-to-b from-white to-primary-light/30 dark:from-gray-900 dark:to-gray-800"
+      className="to-primary-light/30 relative z-10 overflow-hidden bg-gradient-to-b from-white dark:from-gray-900 dark:to-gray-800"
       id="accueil"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:py-4 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-        {/* Mobile Image */}
-        <div className="flex md:hidden justify-center lg:mb-6 lg:mt-4">
-          <div className="relative w-full max-w-[280px] rounded-2xl overflow-hidden flex items-center justify-center">
+      <div className="max-w-8xl grid grid-cols-1 items-center gap-8 px-4 py-12 sm:px-6 sm:py-16 md:grid-cols-2 md:gap-12 md:py-14">                {/* Mobile Image */}
+        <div className="flex justify-center md:hidden">
+          <div className="relative flex w-full max-w-[380px] items-center justify-center">
             <img
-              src={ExamsBro}
+              src={herosectionImage}
               alt="Illustration examens EDU Dash"
-              className="object-contain w-full h-auto drop-shadow-lg"
+              className="h-auto w-full object-contain drop-shadow-xl"
             />
           </div>
         </div>
 
         {/* Text */}
-        <div className="space-y-6 max-w-xl md:max-w-lg lg:max-w-xl text-center md:text-left mx-auto lg:mb-0 mb-12">
-          <h1 className="lg:text-6xl lg:block hidden text-3xl font-display font-bold tracking-tight text-neutral-dark dark:text-gray-100 leading-tight">
-            Gérez votre école <br />
-            <span className="bg-clip-text text-neutral-dark dark:text-gray-100 bg-gradient-to-r from-primary-dark to-orange-500">
-              simplement et efficacement
+        {/* Text */}
+        <div className="mx-auto mb-12 w-full max-w-full text-center md:text-left lg:mb-0 lg:max-w-2xl">
+          {/* Badge */}
+          {/* <div className="mb-6 inline-flex items-center rounded-full border border-[#FFAA28]/20 bg-[#FFAA28]/10 px-4 py-2 text-sm font-medium text-[#FFAA28]">
+        Conçu pour les établissements marocains 🇲🇦
+    </div> */}
+
+          {/* Title */}
+          <h1 className="font-display text-neutral-dark text-4xl leading-tight font-bold tracking-tight lg:text-6xl dark:text-gray-100">
+            Maîtrisez votre établissement
+            <span className="block">
+              en temps réel.
             </span>
           </h1>
 
-          <p className="text-base lg:text-lg text-sm text-neutral-gray dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
-            EDU Dash centralise la communication, le suivi administratif et financier, les bulletins et les statistiques clés. Une solution unique pour une école plus connectée.
+          {/* Subtitle */}
+          <p className="text-neutral-gray mt-6 max-w-xl text-lg leading-relaxed dark:text-gray-300">
+            Centralisez la gestion des élèves, des paiements, des emplois du temps
+            et des communications au sein d'une plateforme moderne et intuitive.
           </p>
 
+          {/* Benefits */}
+          <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-gray-600 md:justify-start dark:text-gray-400">
+            <div className="flex items-center gap-2">
+              <span className="text-[#FFAA28]">✓</span>
+              Gestion centralisée
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-[#FFAA28]">✓</span>
+              Communication simplifiée
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-[#FFAA28]">✓</span>
+              Accessible partout
+            </div>
+          </div>
+
           {/* Desktop Buttons */}
-          <div className="lg:flex hidden flex-col sm:flex-row gap-4 pt-4 items-start sm:items-center">
+          <div className="mt-10 hidden flex-col items-start gap-4 sm:flex-row sm:items-center lg:flex">
             <a href="/login">
-              <button className="cursor-pointer px-10 py-3 text-lg rounded-xl bg-[#FFAA28] text-white font-medium hover:bg-primary-dark/90 transition-all shadow-lg hover:shadow-xl duration-300 flex items-center justify-center">
-                Se Connecter
+              <button className="flex cursor-pointer items-center justify-center rounded-xl bg-[#FFAA28] px-10 py-3 text-lg font-medium text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
+                Se connecter
               </button>
             </a>
-            <a href="#contact">
-              <button className="cursor-pointer px-8 py-4 md:px-6 md:py-3 rounded-xl border-2 border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-all lg:flex items-center justify-center hidden">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-2 text-gray-500 dark:text-gray-300"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Contactez-nous
+
+            <a href="#apropos">
+              <button className="flex cursor-pointer items-center justify-center rounded-xl border-2 border-gray-200 bg-white px-8 py-3 font-medium text-gray-700 transition-all hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700">
+                Découvrir Edu Dash
               </button>
             </a>
           </div>
 
           {/* Mobile Button */}
-          <div className="lg:hidden flex justify-center">
+          <div className="mt-8 flex justify-center lg:hidden">
             <a
               href="/login"
-              className="flex py-3 px-6 rounded-lg bg-[#FFAA28] text-white font-semibold text-base shadow-md hover:bg-orange-500 transition"
+              className="rounded-xl bg-[#FFAA28] px-8 py-3 text-base font-semibold text-white shadow-md transition hover:bg-orange-500"
             >
               Se connecter
             </a>
@@ -237,13 +273,12 @@ export function HeroSection() {
         </div>
 
         {/* Desktop Image */}
-        <div className="relative hidden md:flex justify-center">
-          <div className="relative w-full max-w-[520px] rounded-3xl overflow-hidden flex items-center justify-center">
+        <div className="relative hidden justify-end md:flex">
+          <div className="relative w-full max-w-[770px]">
             <img
-              src={ExamsBro}
+              src={herosectionImage}
               alt="Illustration examens EDU Dash"
-              className="object-contain w-full h-auto"
-              style={{ maxWidth: "520px" }}
+              className="h-auto w-full object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.18)]"
             />
           </div>
         </div>
@@ -251,18 +286,18 @@ export function HeroSection() {
 
       {/* Scroll Indicators */}
 
-    {/* Desktop Mouse Scroll */}
-    <div className="hidden md:flex absolute left-1/2 bottom-28 -translate-x-1/2 flex-col items-center z-50">
-    <a href="#apropos" className="flex flex-col items-center cursor-pointer">
-        <div className="w-6 h-12 rounded-full border-2 border-gray-400 flex items-start justify-center p-1">
-        <div className="w-1 h-1 rounded-full bg-gray-400 animate-scrollDown" />
-        </div>
-        {/* <span className="mt-2 text-sm text-gray-500 dark:text-gray-400">Scroll</span> */}
-    </a>
-    </div>
+      {/* Desktop Mouse Scroll */}
+      <div className="absolute bottom-28 left-1/2 z-50 hidden -translate-x-1/2 flex-col items-center md:flex">
+        <a href="#apropos" className="flex cursor-pointer flex-col items-center">
+          <div className="flex h-12 w-6 items-start justify-center rounded-full border-2 border-gray-400 p-1">
+            <div className="animate-scrollDown h-1 w-1 rounded-full bg-gray-400" />
+          </div>
+          {/* <span className="mt-2 text-sm text-gray-500 dark:text-gray-400">Scroll</span> */}
+        </a>
+      </div>
 
-    <style>
-    {`
+      <style>
+        {`
     @keyframes scrollDown {
         0% { transform: translateY(0); opacity: 0; }
         50% { transform: translateY(6px); opacity: 1; }
@@ -272,8 +307,7 @@ export function HeroSection() {
         animation: scrollDown 1.5s infinite;
     }
     `}
-    </style>
-
+      </style>
 
       {/* Mobile Arrow Button */}
       {/* <div className="flex md:hidden fixed right-4 bottom-16 z-50">
@@ -295,9 +329,9 @@ export function HeroSection() {
       </div> */}
 
       {/* Trusted By Section */}
-      <div className="lg:block hidden relative lg:pt-3 pt-6 lg:py-8 lg:px-6 md:px-12 lg:px-24 bg-white/70 dark:bg-gray-900/50 backdrop-blur-sm border-t border-gray-100 dark:border-gray-700">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <p className="text-center text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400 font-medium mb-8">
+      <div className="relative hidden border-t border-gray-100 bg-white/70 pt-6 backdrop-blur-sm md:px-12 lg:block lg:px-6 lg:px-24 lg:py-8 lg:pt-3 dark:border-gray-700 dark:bg-gray-900/50">
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <p className="mb-8 text-center text-sm font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
             Déjà adopté par des établissements reconnus
           </p>
         </div>
@@ -320,258 +354,705 @@ export function HeroSection() {
   );
 }
 
-export function PourquoiEduDash() {
-    const points = [
-        {
-            icon: <Layers className="h-6 w-6 text-[#FFAA27]" />,
-            title: 'Espace Scolaire Dédié et Sécurisé',
-            desc: 'Chaque établissement bénéficie d’un environnement numérique privé, structuré et sécurisé pour une gestion sereine et professionnelle.',
-        },
-        {
-            icon: <BarChart3 className="h-6 w-6 text-[#FFAA27]" />,
-            title: 'Pilotage Clair et Décisions Rapides',
-            desc: 'Visualisez instantanément les indicateurs essentiels : paiements, absences, performances et statistiques clés.',
-        },
-        {
-            icon: <ShieldCheck className="h-6 w-6 text-[#FFAA27]" />,
-            title: 'Contrôle Avancé par Rôles et Permissions',
-            desc: 'Un système d’accès intelligent qui garantit que chaque acteur voit uniquement les informations qui le concernent.',
-        },
-        {
-            icon: <Shield className="h-6 w-6 text-[#FFAA27]" />,
-            title: 'Gestion Scolaire Centralisée',
-            desc: 'Inscriptions, classes, niveaux, enseignants, finances et documents réunis dans une seule plateforme fluide.',
-        },
-        {
-            icon: <FileDown className="h-6 w-6 text-[#FFAA27]" />,
-            title: 'Automatisation et Gain de Temps',
-            desc: 'Documents, factures, bulletins et exports PDF ou Excel générés rapidement, sans tâches répétitives.',
-        },
-        {
-            icon: <Globe2 className="h-6 w-6 text-[#FFAA27]" />,
-            title: 'Pensé pour les Écoles d’Aujourd’hui',
-            desc: 'Une solution moderne, conforme aux besoins des établissements marocains et européens, prête à évoluer avec votre structure.',
-        },
-    ];
+export function StatsSection() {
+  const items = [
+    { icon: MapPinned, title: "Solution 100% marocaine" },
+    { icon: HeadphonesIcon, title: "Support local" },
+    { icon: ShieldCheck, title: "Hébergement sécurisé" },
+  ];
 
-    return (
-        <section id="apropos" className="bg-white py-14">
-            <div className="mx-auto max-w-7xl px-6 md:px-12">
-
-                <div className="mb-16 text-center">
-                    <h2 className="mb-4 lg:text-3xl text-2xl font-bold text-gray-900 lg:text-4xl">
-                        Pourquoi choisir <span className="">Edu Dash</span> ?
-                    </h2>
-                    <div className="mx-auto mb-8 h-1 w-24 rounded-full bg-[#FFAA27]" />
-                    <p className="mx-auto max-w-2xl text-gray-600 lg:text-lg text-sm">
-                        Une plateforme professionnelle conçue pour structurer, sécuriser et moderniser la gestion scolaire.
-                    </p>
+  return (
+    <section className="pb-8">
+      <div className="mx-auto max-w-5xl px-6">
+        <div className="flex flex-wrap items-center justify-center divide-x divide-gray-100">
+          {items.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div key={item.title} className="flex items-center gap-4 px-10 py-4">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#FFAA27]/10">
+                  <Icon className="h-6 w-6 text-[#FFAA27]" />
                 </div>
-
-                <div className="grid grid-cols-1 gap-x-14 gap-y-12 md:grid-cols-2">
-                    {points.map((item, i) => (
-                        <div key={i} className="group flex items-start space-x-5">
-                            <div className="flex-shrink-0 rounded-xl bg-[#FFAA27]/10 p-3 transition group-hover:bg-[#FFAA27]/20">
-                                {item.icon}
-                            </div>
-                            <div>
-                                <h3 className="mb-2 text-lg font-semibold text-gray-900">
-                                    {item.title}
-                                </h3>
-                                <p className="text-sm leading-relaxed text-gray-600">
-                                    {item.desc}
-                                </p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-            </div>
-        </section>
-    );
+                <span className="text-base font-medium text-gray-800">
+                  {item.title}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 }
 
-export function WhoItsFor() {
-  const roles = [
+export function PourquoiEduDash() {
+  const points = [
+    // {
+    //     icon: <Layers className="h-6 w-6 text-[#FFAA27]" />,
+    //     title: 'Espace Scolaire Dédié et Sécurisé',
+    //     desc: 'Chaque établissement bénéficie d’un environnement numérique privé, structuré et sécurisé pour une gestion sereine et professionnelle.',
+    // },
     {
-      title: "Direction & Administration",
-      desc: "Pilotez l’établissement avec une vision claire et centralisée.",
-      features: [
-        "Gestion scolaire complète",
-        "Suivi financier & paiements",
-        "Statistiques et rapports",
-      ],
-      icon: <ShieldCheckIcon className="h-8 w-8 text-[#FFAA27]" />,
+      icon: <Eye className="h-6 w-6 text-[#FFAA27]" />,
+      title: 'Une vision claire pour décider plus vite',
+      desc: 'Accédez en un instant aux données essentielles : soldes, absences, performances et statistiques clés pour piloter votre école efficacement.',
     },
     {
-      title: "Enseignants",
-      desc: "Un espace simple pour gérer la pédagogie au quotidien.",
-      features: ["Notes & absences", "Devoirs et évaluations", "Suivi des élèves"],
-      icon: <GraduationCap className="h-8 w-8 text-[#FFAA27]" />,
+      icon: <BarChart3 className="h-6 w-6 text-[#FFAA27]" />,
+      title: 'Une solution moderne, pensée pour évoluer',
+      desc: 'Conçue pour les écoles marocaines et européennes, EDU Dash s’adapte à votre croissance et à vos besoins futurs.',
     },
     {
-      title: "Parents",
-      desc: "Une visibilité fiable sur la scolarité des enfants.",
-      features: [
-        "Notes & bulletins",
-        "Notifications importantes",
-        "Demandes administratives",
-      ],
-      icon: <Users className="h-8 w-8 text-[#FFAA27]" />,
+      icon: <ShieldCheck className="h-6 w-6 text-[#FFAA27]" />,
+      title: 'Contrôle Avancé par Rôles et Permissions',
+      desc: 'Un système d’accès intelligent qui garantit que chaque acteur voit uniquement les informations qui le concernent.',
     },
     {
-      title: "Élèves",
-      desc: "Tout le parcours scolaire en un seul espace.",
-      features: ["Emploi du temps", "Résultats & moyennes", "Devoirs à faire"],
-      icon: <User className="h-8 w-8 text-[#FFAA27]" />,
+      icon: <Shield className="h-6 w-6 text-[#FFAA27]" />,
+      title: 'Toute votre gestion sur une seule plateforme',
+      desc: 'Élèves, classes, enseignants, finances, documents… tout est centralisé pour éviter les outils multiples et les pertes de temps.',
+    },
+    {
+      icon: <FileDown className="h-6 w-6 text-[#FFAA27]" />,
+      title: 'Automatisation et gain de temps réel',
+      desc: 'Générez facilement factures, bulletins, documents et exports (PDF / Excel) sans tâches répétitives.',
+    },
+    {
+      icon: <Globe2 className="h-6 w-6 text-[#FFAA27]" />,
+      title: 'Pensé pour les Écoles d’Aujourd’hui',
+      desc: 'Une solution moderne, conforme aux besoins des établissements marocains et européens, prête à évoluer avec votre structure.',
     },
   ];
 
-  const [openIndex, setOpenIndex] = useState(null);
-
   return (
-    <section className="relative overflow-hidden py-16">
-      {/* Decorative shapes (DESKTOP ONLY) */}
-      <div className="pointer-events-none absolute inset-0 hidden md:block">
-        {/* Left half circle */}
-        <div className="absolute left-[-120px] top-1/2 h-[360px] w-[360px] -translate-y-1/2 rounded-full bg-[#FFAA27]/10 blur-3xl" />
-
-        {/* Right half circle */}
-        <div className="absolute right-[-120px] top-1/3 h-[300px] w-[300px] rounded-full bg-[#FFAA27]/10 blur-3xl" />
-      </div>
-
-      <div className="relative mx-auto max-w-7xl px-6">
-        {/* Header */}
+    <section id="apropos" className="relative bg-white py-14">
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
         <div className="mb-16 text-center">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900 lg:text-4xl">
-            Une plateforme pensée pour{" "}
-            <span className="">chaque acteur</span>
+          <h2 className="mb-4 text-2xl font-bold text-gray-900 lg:text-3xl lg:text-4xl">
+            Pourquoi choisir <span className="">Edu Dash</span> ?
           </h2>
+          <div className="mx-auto mb-8 h-1 w-24 rounded-full bg-[#FFAA27]" />
           <p className="mx-auto max-w-2xl text-sm text-gray-600 lg:text-lg">
-            Des fonctionnalités ciblées selon chaque rôle, pour une gestion fluide
-            et maîtrisée.
+            Une plateforme moderne pensée pour simplifier la gestion de votre école, améliorer la communication et vous faire gagner du
+            temps chaque jour.{' '}
           </p>
         </div>
 
-        {/* DESKTOP */}
-        <div className="relative hidden md:block">
-          {/* Animated line */}
-          <div className="pointer-events-none absolute left-0 right-0 top-1/2 z-0 flex justify-center">
-            <div className="h-[2px] w-[85%] origin-left scale-x-0 rounded-full bg-[#FFAA27]/70 animate-flowLine" />
-          </div>
-
-          <div className="relative z-10 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-            {roles.map((role, i) => (
-              <div
-                key={i}
-                className="group relative h-[280px] overflow-hidden rounded-3xl
-                           border border-gray-100 bg-white
-                           shadow-sm transition-all duration-500
-                           hover:-translate-y-2 hover:shadow-2xl"
-              >
-                <div className="relative z-10 flex h-full flex-col p-8">
-                  <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl">
-                    {role.icon}
-                  </div>
-                  <h3 className="mb-2 text-lg font-semibold text-gray-900">
-                    {role.title}
-                  </h3>
-                  <p className="text-sm text-gray-600">{role.desc}</p>
-                </div>
-
-                {/* Hover overlay */}
-                <div
-                  className="absolute inset-0 z-20 flex flex-col justify-center
-                             bg-white/90 p-8 backdrop-blur-sm
-                             opacity-0 translate-y-4
-                             transition-all duration-500
-                             group-hover:opacity-100 group-hover:translate-y-0"
-                >
-                  <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-[#FFAA27]">
-                    Fonctionnalités clés
-                  </p>
-                  <ul className="space-y-3 text-sm text-gray-800">
-                    {role.features.map((f, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#FFAA27]" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+        <div className="grid grid-cols-1 gap-x-14 gap-y-12 md:grid-cols-2">
+          {points.map((item, i) => (
+            <div key={i} className="group flex items-start space-x-5">
+              <div className="flex-shrink-0 rounded-xl bg-[#FFAA27]/10 p-3 transition group-hover:bg-[#FFAA27]/20">{item.icon}</div>
+              <div>
+                <h3 className="mb-2 text-lg font-semibold text-gray-900">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-gray-600">{item.desc}</p>
               </div>
-            ))}
+            </div>
+          ))}
+        </div>
+        {/* <div className="absolute left-0 bottom-0 w-full h-1 bg-gradient-to-r from-[#FFAA27]/20 via-transparent to-[#FFAA27]/20 pointer-events-none" /> */}
+      </div>
+    </section>
+  );
+}
+
+export function HowItWorksSection() {
+  const steps = [
+    {
+      icon: Building2,
+      title: "Création de votre établissement",
+      description:
+        "Nous configurons votre espace selon votre structure et vos besoins.",
+    },
+    {
+      icon: Upload,
+      title: "Importation des données",
+      description:
+        "Import simple des élèves, enseignants et informations existantes.",
+    },
+    {
+      icon: GraduationCap,
+      title: "Formation de votre équipe",
+      description:
+        "Accompagnement personnalisé pour une prise en main rapide.",
+    },
+    {
+      icon: Rocket,
+      title: "Mise en service",
+      description:
+        "Votre établissement est opérationnel sur Edu Dash.",
+    },
+  ];
+
+  return (
+    <section className="py-14">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="text-center">
+          <span className="rounded-full bg-[#FFAA27]/10 px-4 py-2 text-sm font-semibold text-[#FFAA27]">
+            Mise en place simplifiée
+          </span>
+
+          <h2 className="mt-6 text-4xl font-bold text-gray-900">
+            Déployez Edu Dash en quelques étapes
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-2xl text-gray-600">
+            Nous vous accompagnons de la configuration jusqu'à la mise en service.
+          </p>
+        </div>
+
+        <div className="relative mt-20">
+          <div className="absolute left-0 right-0 top-10 hidden h-0.5 bg-[#FFAA27]/20 lg:block" />
+
+          <div className="grid gap-8 lg:grid-cols-4">
+            {steps.map((step, index) => {
+              const Icon = step.icon;
+
+              return (
+                <div
+                  key={step.title}
+                  className="relative rounded-3xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+                >
+                  <div className="absolute -top-4 left-8 flex h-8 w-8 items-center justify-center rounded-full bg-[#FFAA27] text-sm font-bold text-white">
+                    {index + 1}
+                  </div>
+
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#FFAA27]/10">
+                    <Icon className="h-8 w-8 text-[#FFAA27]" />
+                  </div>
+
+                  <h3 className="text-lg font-bold text-gray-900">
+                    {step.title}
+                  </h3>
+
+                  <p className="mt-3 text-sm leading-relaxed text-gray-600">
+                    {step.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function ProductPreview() {
+  const [showDemoModal, setShowDemoModal] = useState(false);
+  const features = [
+    {
+      icon: <LayoutDashboard className="h-5 w-5" />,
+      title: 'Tableau de bord intelligent',
+      description: 'Une vue complète de votre établissement en temps réel.',
+    },
+    {
+      icon: <GraduationCap className="h-5 w-5" />,
+      title: 'Gestion des élèves',
+      description: 'Suivez facilement inscriptions, classes et dossiers.',
+    },
+    {
+      icon: <CreditCard className="h-5 w-5" />,
+      title: 'Paiements & facturation',
+      description: 'Centralisez les paiements et simplifiez le suivi.',
+    },
+    {
+      icon: <Bell className="h-5 w-5" />,
+      title: 'Communication simplifiée',
+      description: 'Restez connecté avec enseignants et parents.',
+    },
+  ];
+
+  return (
+    <section className="bg-white py-14 ">
+      <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
+        {/* Header */}
+        <div className="mx-auto max-w-5xl text-center">
+          <span className="inline-flex rounded-full bg-[#FFAA27]/10 px-4 py-1 text-sm font-medium text-[#FFAA27]">
+            Découvrez Edu Dash
+          </span>
+
+          <h2 className="mt-6 w-full text-3xl font-bold tracking-tight text-gray-900 lg:text-5xl">
+            Une nouvelle façon de gérer votre école.
+          </h2>
+
+          <p className="mt-6 text-lg leading-relaxed text-gray-600">
+            Simple, moderne et pensée pour toute votre communauté éducative.
+          </p>
+        </div>
+
+        {/* Dashboard Screenshot */}
+        <div className="relative mx-auto mt-16 max-w-6xl">
+          {/* Glow */}
+          <div className="absolute -inset-6 rounded-[40px] bg-[#FFAA27]/5 blur-3xl" />
+
+          {/* Browser Frame */}
+          <div className="relative overflow-hidden rounded-[32px] border border-gray-200 bg-white shadow-[0_30px_80px_rgba(0,0,0,0.12)]">
+            {/* Browser Top */}
+            <div className="flex items-center gap-2 border-b border-gray-100 px-6 py-4">
+              <div className="h-3 w-3 rounded-full bg-red-300" />
+              <div className="h-3 w-3 rounded-full bg-yellow-300" />
+              <div className="h-3 w-3 rounded-full bg-green-300" />
+
+              <div className="ml-4 rounded-full bg-gray-100 px-4 py-1 text-xs text-gray-500">
+                app.edudash.ma
+              </div>
+            </div>
+
+            {/* Screenshot */}
+            <img
+              src={dashboardPreview}
+              alt="Edu Dash Dashboard"
+              className="w-full object-cover"
+            />
           </div>
         </div>
 
-        {/* MOBILE */}
-        <div className="space-y-4 md:hidden">
-          {roles.map((role, i) => {
-            const isOpen = openIndex === i;
-            return (
-              <div
-                key={i}
-                className="w-full overflow-hidden border-b border-gray-200 bg-white"
-              >
-                <button
-                  onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between p-4"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full text-lg font-semibold text-[#FFAA27]">
-                      {i + 1}
-                    </div>
-                    <div className="text-left">
-                      <h3 className="text-lg font-semibold text-gray-900">
-                        {role.title}
-                      </h3>
-                      <p className="text-sm text-gray-600">{role.desc}</p>
-                    </div>
-                  </div>
-                  <ChevronDown
-                    className={`h-5 w-5 transition-transform ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
+        {/* Features */}
+        <div className="mx-auto mt-16 grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="group flex items-center gap-4 rounded-2xl border border-gray-100 bg-white px-5 py-4 transition-all duration-300 hover:border-[#FFAA27]/30 hover:shadow-md"
+            >
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-[#FFAA27]/10 text-[#FFAA27] transition-transform duration-300 group-hover:scale-110">
+                {feature.icon}
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-gray-900">{feature.title}</h3>
+                <p className="mt-0.5 text-xs leading-relaxed text-gray-500">{feature.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
 
-                <div
-                  className={`overflow-hidden px-4 transition-all duration-500 ${
-                    isOpen ? "max-h-96 py-3" : "max-h-0"
-                  }`}
-                >
-                  <ul className="space-y-2">
-                    {role.features.map((f, idx) => (
-                      <li key={idx} className="flex items-center gap-2">
-                        <span className="h-2 w-2 rounded-full bg-[#FFAA27]" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
+        {/* Bottom CTA */}
+        <div className="mt-16 text-center">
+          <p className="mx-auto max-w-2xl text-gray-600">
+            Découvrez comment Edu Dash peut transformer la gestion
+            de votre établissement et renforcer la collaboration
+            entre les équipes pédagogiques, les élèves et les familles.
+          </p>
+
+          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+            <button
+            >
+              <a
+                href="https://wa.me/212765232205?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-xl text-white bg-green-500 px-6 py-3 font-medium transition hover:bg-green-600 "
+              >
+                <FaWhatsapp className="h-5 w-5" />
+                Demander une démo WhatsApp
+              </a>
+            </button>
+
+            <button
+              onClick={() => setShowDemoModal(true)}
+              className="rounded-xl border border-gray-200 px-7 py-3 font-medium text-gray-700 transition hover:border-gray-300 hover:bg-gray-50">
+              En savoir plus
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {showDemoModal && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
+          <div className="relative w-full max-w-4xl overflow-hidden rounded-[32px] bg-white shadow-[0_30px_80px_rgba(0,0,0,0.25)]">
+            {/* Close */}
+            <button
+              onClick={() => setShowDemoModal(false)}
+              className="absolute top-5 right-5 z-10 rounded-xl p-2 text-gray-500 transition hover:bg-gray-100 hover:text-gray-700"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            <div className="grid lg:grid-cols-2">
+              {/* Left */}
+              <div className="p-8 lg:p-12">
+                <div className="inline-flex rounded-full bg-[#FFAA27]/10 px-4 py-1 text-sm font-medium text-[#FFAA27]">
+                  Démonstration Edu Dash
                 </div>
+
+                <h3 className="mt-6 text-3xl font-bold text-gray-900">
+                  Planifions une démonstration
+                </h3>
+
+                <p className="mt-5 leading-relaxed text-gray-600">
+                  Vous souhaitez découvrir Edu Dash en détail ?
+                  Contactez-nous afin d'organiser une démonstration
+                  personnalisée adaptée à votre établissement.
+                </p>
+
+                <div className="mt-8 space-y-4">
+                  <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
+                    <p className="text-sm text-gray-500">
+                      Email
+                    </p>
+
+                    <p className="font-semibold text-gray-900">
+                      contact@edudash.ma
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
+                    <p className="text-sm text-gray-500">
+                      Téléphone
+                    </p>
+
+                    <p className="font-semibold text-gray-900">
+                      +212 765 23 22 05
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => setShowDemoModal(false)}
+                  className="mt-8 rounded-xl border border-gray-200 px-6 py-3 font-medium text-gray-700 transition hover:bg-gray-50"
+                >
+                  Fermer
+                </button>
+              </div>
+
+              {/* Right */}
+              <div className="flex items-center justify-center bg-gray-50 p-8 lg:p-12">
+                <div className="w-full max-w-sm">
+                  <a
+                    href={businessCardImage}
+                    download="Carte-de-visite-Edu-Dash.png"
+                    className="group block"
+                  >
+                    <div className="overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-xl transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl">
+                      <img
+                        src={businessCardImage}
+                        alt="Carte de visite Edu Dash"
+                        className="w-full transition duration-700 group-hover:scale-[1.03]"
+                      />
+                    </div>
+
+                    <div className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-[#FFAA27] px-5 py-3 font-medium text-white transition group-hover:bg-[#f39a08]">
+                      <Download className="h-5 w-5" />
+
+                      Télécharger la carte
+                    </div>
+                  </a>
+
+                  <p className="mt-4 text-center text-sm text-gray-500">
+                    Cliquez sur la carte pour la télécharger
+                    et retrouver facilement nos coordonnées.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+export function WhoItsFor() {
+  const [selected, setSelected] = useState(null);
+
+  useEffect(() => {
+    const esc = (e) => {
+      if (e.key === "Escape") setSelected(null);
+    };
+    document.addEventListener("keydown", esc);
+    document.body.style.overflow = selected ? "hidden" : "";
+    return () => {
+      document.removeEventListener("keydown", esc);
+      document.body.style.overflow = "";
+    };
+  }, [selected]);
+
+  const modules = [
+    {
+      title: "Vie scolaire",
+      subtitle: "Le cœur de votre établissement.",
+      icon: BookOpen,
+      popular: ["Générateur intelligent d'emplois du temps"],
+      features: [
+        "Inscriptions & pré-inscriptions en ligne",
+        "Générateur intelligent d'emplois du temps",
+        "Bulletins, relevés & fiches scolaires",
+        "Fiche scolaire complète de l'élève",
+      ],
+      extras: [
+        "Gestion des absences & retards",
+        "Suivi complet du parcours de l'élève",
+        "Gestion des niveaux & filières",
+        "Dossiers administratifs centralisés",
+        "Statistiques scolaires en temps réel",
+      ],
+    },
+    {
+      title: "Communication",
+      subtitle: "Restez connecté.",
+      icon: MessageSquare,
+      popular: ["Notifications ciblées par rôle"],
+      features: [
+        "Notifications ciblées par rôle",
+        "Communication parents-école",
+        "Demandes administratives",
+        "Messagerie interne sécurisée",
+      ],
+      extras: [
+        "Réunions numériques",
+        "Alertes en temps réel",
+        "Diffusion d'annonces",
+      ],
+    },
+    {
+      title: "Finance",
+      subtitle: "Visibilité financière.",
+      icon: Wallet,
+      popular: ["Suivi des paiements"],
+      features: [
+        "Facturation automatisée",
+        "Suivi des paiements",
+        "Soldes parents",
+        "Tableaux de bord financiers",
+      ],
+      extras: [
+        "Gestion dépenses & revenus",
+        "Exports PDF",
+        "Historique transactions",
+        "Analyses financières",
+      ],
+    },
+    {
+      title: "Pédagogie",
+      subtitle: "Pour la réussite.",
+      icon: MonitorSmartphone,
+      popular: ["Compétences & badges"],
+      features: [
+        "Notes & évaluations",
+        "Cahier de textes",
+        "Compétences & badges",
+        "Suivi des performances",
+      ],
+      extras: [
+        "Devoirs en ligne",
+        "Analyse des résultats",
+        "Ressources pédagogiques",
+      ],
+    },
+    {
+      title: "Services",
+      subtitle: "Au-delà de la classe.",
+      icon: Briefcase,
+      popular: ["Sorties scolaires"],
+      features: [
+        "Transport scolaire",
+        "Cantine",
+        "Activités parascolaires",
+        "Sorties scolaires",
+      ],
+      extras: [
+        "Bibliothèque",
+        "Ressources scolaires",
+      ],
+    },
+    {
+      title: "Administration",
+      subtitle: "Pilotez sereinement.",
+      icon: ShieldCheck,
+      popular: ["Archivage annuel"],
+      features: [
+        "Rôles & permissions",
+        "KPI décisionnels",
+        "Historique actions",
+        "Archivage annuel",
+      ],
+      extras: [
+        "Gestion du personnel",
+        "Contrôle d'accès",
+        "Rapports stratégiques",
+        "Multi-établissements",
+      ],
+    },
+  ];
+
+  return (
+    <section className="bg-white py-24 relative overflow-hidden">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="inline-flex rounded-full bg-[#FFAA27]/10 px-4 py-1 text-sm font-medium text-[#FFAA27]">
+            Tout-en-un
+          </span>
+          <h2 className="mt-6 text-3xl lg:text-5xl font-bold">
+            Tout ce dont votre établissement a besoin.
+          </h2>
+          <p className="mt-5 text-gray-600">
+            Une plateforme unique regroupant tous les outils indispensables.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {modules.map((module) => {
+            const Icon = module.icon;
+            return (
+              <div key={module.title}
+                className="group rounded-3xl border border-gray-100 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#FFAA27]/20 hover:shadow-xl">
+
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-[#FFAA27]/10 text-[#FFAA27]">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900">{module.title}</h3>
+                    <p className="text-xs text-gray-400">{module.subtitle}</p>
+                  </div>
+                </div>
+
+                <div className="mt-5 space-y-2">
+                  {module.features.map((f) => (
+                    <div key={f} className="flex items-center gap-2 text-sm text-gray-600">
+                      <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#FFAA27]" />
+                      {f}
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => setSelected(module)}
+                  className="mt-5 flex items-center gap-1.5 text-sm font-medium text-[#FFAA27] transition hover:gap-2.5">
+                  +{module.extras.length} fonctionnalités
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </button>
               </div>
             );
           })}
         </div>
       </div>
 
-      {/* Animation */}
-      <style>
-        {`
-          @keyframes flowLine {
-            from {
-              transform: scaleX(0);
-            }
-            to {
-              transform: scaleX(1);
-            }
-          }
+      {selected && (
+        <div
+          onClick={() => setSelected(null)}
+          className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white rounded-3xl max-w-xl w-full p-8 max-h-[80vh] overflow-y-auto">
+            <div className="flex justify-between items-center">
+              <h3 className="text-2xl font-bold">{selected.title}</h3>
+              <button onClick={() => setSelected(null)}>
+                <X />
+              </button>
+            </div>
 
-          .animate-flowLine {
-            animation: flowLine 1.2s ease-out forwards;
-          }
-        `}
-      </style>
+            <p className="mt-2 text-gray-600">{selected.subtitle}</p>
+
+            <div className="mt-6 space-y-3">
+              {selected.extras.map((f) => (
+                <div key={f} className="border rounded-2xl p-4">
+                  {f}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+export function ComparisonSection() {
+  const others = [
+    'Interfaces complexes et anciennes',
+    'Outils multiples et dispersés',
+    'Communication difficile',
+    'Manque de visibilité globale',
+    'Formation longue nécessaire',
+    'Expérience identique pour tous',
+  ];
+
+  const eduDash = [
+    'Interface moderne et intuitive',
+    'Une seule plateforme pour tout gérer',
+    'Communication simple et directe',
+    'Tableaux de bord en temps réel',
+    'Prise en main rapide',
+    'Expérience adaptée à chaque rôle',
+  ];
+
+  return (
+    <section className="relative overflow-hidden py-24">
+      {/* Background glow */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute top-1/3 left-[-100px] h-[300px] w-[300px] rounded-full bg-[#FFAA27]/10 blur-3xl" />
+        <div className="absolute right-[-120px] bottom-0 h-[320px] w-[320px] rounded-full bg-[#FFAA27]/10 blur-3xl" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-6">
+        {/* Header */}
+        <div className="mb-16 text-center">
+          <h2 className="mb-4 text-3xl font-bold text-gray-900 lg:text-5xl">EDU Dash vs les solutions traditionnelles</h2>
+          <p className="mx-auto max-w-2xl text-gray-600 lg:text-lg">
+            Arrêtez les systèmes compliqués. Passez à une gestion moderne, simple et efficace.
+          </p>
+        </div>
+
+        {/* Cards */}
+        <div className="grid gap-8 lg:grid-cols-2">
+          {/* ❌ Others */}
+          <div className="group relative rounded-3xl border border-gray-200 bg-white p-8 shadow-sm transition-all duration-500 hover:shadow-xl">
+            <div className="mb-6 flex items-center gap-3">
+              <XCircle className="h-7 w-7 text-gray-400" />
+              <h3 className="text-xl font-semibold text-gray-800">Autres solutions</h3>
+            </div>
+
+            <ul className="space-y-4">
+              {others.map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-gray-600">
+                  <XCircle className="mt-1 h-5 w-5 text-gray-300" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* ✅ EDU DASH */}
+          <div className="group relative rounded-3xl border-2 border-[#FFAA27] bg-white p-8 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+            {/* Badge */}
+            <span className="absolute -top-4 left-6 rounded-full bg-[#FFAA27] px-4 py-1 text-xs font-semibold text-white shadow">
+              Recommandé
+            </span>
+
+            <div className="mb-6 flex items-center gap-3">
+              <CheckCircle2 className="h-7 w-7 text-[#FFAA27]" />
+              <h3 className="text-xl font-semibold text-gray-900">EDU Dash</h3>
+            </div>
+
+            <ul className="space-y-4">
+              {eduDash.map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-gray-800">
+                  <CheckCircle2 className="mt-1 h-5 w-5 text-[#FFAA27]" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            {/* Glow hover */}
+            <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br from-[#FFAA27]/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          </div>
+        </div>
+
+        {/* Bottom highlight */}
+        <div className="mt-16 text-center">
+          <p className="mx-auto max-w-2xl text-lg font-medium text-gray-800">
+            Avec EDU Dash, vous ne changez pas seulement de logiciel — vous améliorez toute l’organisation de votre école.
+          </p>
+
+          {/* CTA */}
+          {/* <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <button className="rounded-xl bg-[#FFAA27] px-6 py-3 font-semibold text-white shadow-md transition hover:scale-105 hover:shadow-lg">
+              Réserver une démo
+            </button>
+            <button className="rounded-xl border border-gray-300 px-6 py-3 font-semibold text-gray-700 transition hover:bg-gray-100">
+              Voir EDU Dash en action
+            </button>
+          </div> */}
+        </div>
+      </div>
     </section>
   );
 }
@@ -580,84 +1061,97 @@ export function TrustSection() {
   const items = [
     {
       icon: <Shield className="h-7 w-7 text-[#FFAA27]" />,
-      title: "Sécurité des données",
-      desc: "Infrastructure robuste, accès strictement contrôlés et isolation complète des données.",
+      title: 'Sécurité totale de vos données',
+      desc: 'Vos données sont protégées et isolées. Chaque établissement dispose d’un espace sécurisé, avec des accès strictement contrôlés.',
     },
     {
       icon: <Globe2 className="h-7 w-7 text-[#FFAA27]" />,
-      title: "Conformité & Fiabilité",
-      desc: "Architecture inspirée des standards européens, pensée pour la stabilité et l’évolutivité à long terme.",
+      title: 'Une plateforme fiable au quotidien',
+      desc: 'Un système stable et performant, conçu pour fonctionner sans interruption et accompagner votre école sur le long terme.',
     },
     {
       icon: <MessageCircle className="h-7 w-7 text-[#FFAA27]" />,
-      title: "Support & Accompagnement",
-      desc: "Une équipe humaine, réactive et impliquée à chaque étape du déploiement et de l’utilisation.",
+      title: 'Un accompagnement réel',
+      desc: 'Nous vous accompagnons à chaque étape : mise en place, formation et utilisation quotidienne. Vous n’êtes jamais seul.',
     },
   ];
 
-  return (
-    <section className="relative overflow-hidden py-20">
-      <div className="mx-auto max-w-7xl px-6">
+  const sectionRef = useRef(null);
+  const [visible, setVisible] = useState(false);
 
-        {/* Trust Badge */}
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.3 },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section ref={sectionRef} className="relative overflow-hidden py-20">
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
+        {/* Badge */}
         <div className="mb-6 flex justify-center">
           <span className="rounded-full bg-[#FFAA27]/10 px-4 py-1 text-sm font-medium text-[#FFAA27]">
-            Conçu pour les établissements exigeants
+            Déjà adopté par des établissements qui nous font confiance
           </span>
         </div>
 
         {/* Header */}
-        <div className="mx-auto mb-20 max-w-3xl text-center">
-          <h2 className="mb-4 text-2xl font-bold text-gray-900 lg:text-4xl">
-            Une solution <span className="">fiable, sécurisée</span> et durable
-          </h2>
-          <p className="text-sm text-gray-600 lg:text-lg">
-            Edu Dash accompagne les écoles avec une vision long terme, une
-            technologie maîtrisée et une transparence totale.
+        <div className="mx-auto mb-16 max-w-3xl text-center">
+          <h2 className="mb-4 text-2xl font-bold text-gray-900 lg:text-4xl dark:text-gray-100">Gérez votre école en toute confiance</h2>
+          <p className="text-sm text-gray-600 lg:text-lg dark:text-gray-300">
+            EDU Dash vous offre une solution stable, sécurisée et pensée pour durer, avec un accompagnement à chaque étape.
           </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid gap-10 md:grid-cols-3">
+        {/* Cards layout */}
+        <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {items.map((item, i) => (
             <div
               key={i}
-              className="
-                group relative rounded-3xl border border-gray-100 bg-white p-8
-                shadow-sm transition-all duration-500
-                hover:-translate-y-3 hover:shadow-2xl
-              "
+              className={`relative flex flex-col items-start space-y-4 rounded-2xl bg-white p-8 shadow-md transition-all duration-500 hover:shadow-xl dark:bg-gray-800 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'} `}
+              style={{ transitionDelay: `${i * 150}ms` }}
             >
-              {/* Hover glow */}
-              <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br from-[#FFAA27]/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-              <div className="relative z-10">
-                {/* Icon */}
-                <div className="mb-6 inline-flex items-center justify-center">
-                  {item.icon}
-                </div>
-
-                <h3 className="mb-3 text-lg font-semibold text-gray-900">
-                  {item.title}
-                </h3>
-
-                <p className="text-sm leading-relaxed text-gray-600">
-                  {item.desc}
-                </p>
+              {/* Icon */}
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#FFAA27]/10 text-[#FFAA27] transition-all duration-300 group-hover:bg-[#FFAA27]/20">
+                {item.icon}
               </div>
 
-              {/* Bottom accent */}
-              {/* <span className="absolute bottom-0 left-0 h-[3px] w-full origin-left scale-x-0 bg-[#FFAA27] transition-transform duration-500 group-hover:scale-x-100" /> */}
+              {/* Title */}
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{item.title}</h3>
+
+              {/* Description */}
+              <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">{item.desc}</p>
+
+              {/* Subtle hover accent line */}
+              <span className="mt-2 block h-1 w-16 rounded-full bg-[#FFAA27]/30 transition-all duration-500 group-hover:w-full"></span>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Background ambient glow */}
+      <div className="pointer-events-none absolute top-1/2 left-[-80px] h-[300px] w-[300px] -translate-y-1/2 rounded-full bg-[#FFAA27]/5 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/3 right-[-80px] h-[250px] w-[250px] rounded-full bg-[#FFAA27]/5 blur-3xl" />
     </section>
   );
 }
 
 export function StatistiquesHome() {
-  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const sectionRef = useRef(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -706,68 +1200,49 @@ export function StatistiquesHome() {
   ];
 
   return (
-    <section
-      ref={sectionRef}
-      id="statistiques"
-      className="relative overflow-hidden py-20"
-    >
+    <section ref={sectionRef} id="statistiques" className="relative overflow-hidden border-t border-gray-100 bg-white/80 py-16 backdrop-blur-sm">
       {/* Side glows */}
       {/* <div className="pointer-events-none absolute inset-y-0 left-0 w-72 bg-gradient-to-r from-[#FFAA27]/10 to-transparent" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-72 bg-gradient-to-l from-[#FFAA27]/10 to-transparent" /> */}
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
-
         {/* Header */}
         <div className="mb-20 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-gray-900 lg:text-4xl">
-            Des chiffres qui parlent d’eux-mêmes
-          </h2>
+          <h2 className="mb-4 text-3xl font-bold text-gray-900 lg:text-4xl">Des chiffres qui parlent d’eux-mêmes</h2>
           <p className="mx-auto max-w-2xl text-gray-600 lg:text-lg">
-            Des statistiques réelles qui reflètent la confiance des établissements
-            envers <span className="font-semibold">Edu Dash</span>.
+            Des statistiques réelles qui reflètent la confiance des établissements envers <span className="font-semibold">Edu Dash</span>.
           </p>
         </div>
 
         {/* Stats grid */}
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((s, i) => (
-            <div
-              key={i}
-              className={`
-                group relative overflow-hidden rounded-3xl
-                border border-gray-100 bg-white/80
-                p-8 backdrop-blur-sm
-                shadow-sm transition-all duration-500
-                hover:-translate-y-2 hover:shadow-2xl
-                ${visible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}
-              `}
-              style={{ transitionDelay: `${i * 150}ms` }}
-            >
-              {/* Card glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#FFAA27]/15 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        <div className="relative mt-16">
+          {/* vertical separators for desktop */}
+          <div className="absolute inset-y-8 left-1/4 hidden w-px bg-gray-200 lg:block" />
+          <div className="absolute inset-y-8 left-2/4 hidden w-px bg-gray-200 lg:block" />
+          <div className="absolute inset-y-8 left-3/4 hidden w-px bg-gray-200 lg:block" />
 
-              <div className="relative z-10 flex flex-col items-center text-center">
-                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#FFAA27]/10 transition-transform duration-500 group-hover:scale-110">
+          <div className="grid gap-14 text-center sm:grid-cols-2 lg:grid-cols-4">
+            {stats.map((s, i) => (
+              <div
+                key={i}
+                className={`group relative flex flex-col items-center transition-all duration-700 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'} `}
+                style={{ transitionDelay: `${i * 180}ms` }}
+              >
+                {/* Icon */}
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFAA27]/10 text-[#FFAA27] transition-transform duration-500 group-hover:scale-110">
                   {s.icon}
                 </div>
 
-                <h3 className="mb-1 text-4xl font-extrabold text-[#FFAA27]">
-                  {visible ? (
-                    <CountUp start={visible} end={s.end} duration={2800} suffix={s.suffix} />
-                  ) : (
-                    <>0{s.suffix}</>
-                  )}
-                </h3>
+                {/* Number */}
+                <div className="text-4xl font-extrabold tracking-tight text-gray-900">
+                  {visible ? <CountUp end={s.end} duration={2.8} suffix={s.suffix} /> : <>0{s.suffix}</>}
+                </div>
 
-                <p className="mt-1 text-sm font-medium text-gray-700">
-                  {s.label}
-                </p>
+                {/* Label */}
+                <p className="mt-3 max-w-[160px] text-sm font-medium text-gray-600">{s.label}</p>
               </div>
-
-              {/* Bottom accent */}
-              <span className="absolute bottom-0 left-0 h-1 w-full scale-x-0 bg-[#FFAA27] transition-transform duration-500 group-hover:scale-x-100" />
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -776,50 +1251,72 @@ export function StatistiquesHome() {
 
 const testimonials = [
   {
-    name: "Mme Amina",
-    role: "Directrice d’École Privée",
-    quote:
-      "EDU Dash a transformé notre manière de gérer l’établissement. Communication, paiements, suivi… tout est devenu plus simple !",
-    img: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+    name: 'M. Youssef El Kafi',
+    role: 'Directeur',
+    school: 'École privée · Casablanca',
+    quote: "EDU Dash a transformé notre manière de gérer l'établissement. Communication, finances, suivi… tout est devenu plus simple !",
+    initials: 'YK',
+    color: 'bg-amber-100 text-amber-700',
   },
   {
-    name: "M. Youssef",
-    role: "Enseignant Principal",
-    quote:
-      "Un gain de temps incroyable ! Je peux gérer mes notes, absences et exercices sans stress depuis une seule plateforme.",
-    img: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+    name: 'M. Youssef',
+    role: 'Enseignant Principal',
+    school: 'Lycée privé · Rabat',
+    quote: "Un gain de temps incroyable ! Je peux gérer mes notes, absences et exercices sans stress depuis une seule plateforme.",
+    initials: 'YO',
+    color: 'bg-blue-100 text-blue-700',
   },
   {
-    name: "Mme Sara",
-    role: "Parent d’Élève",
-    quote:
-      "Je reçois les notes et les notifications en temps réel. C’est rassurant de voir la progression de mon enfant si facilement.",
-    img: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+    name: 'Mme Sara',
+    role: "Parent d'Élève",
+    school: 'École primaire · Marrakech',
+    quote: "Je reçois les notes et les notifications en temps réel. C'est rassurant de voir la progression de mon enfant si facilement.",
+    initials: 'SA',
+    color: 'bg-green-100 text-green-700',
   },
 ];
 
-
 export function Témoignages() {
   return (
-    <section className="relative lg:py-24 py-12 overflow-hidden bg-white dark:bg-gray-900">
-      <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
-        <h2 className="lg:text-4xl text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">Témoignages <span> & Avis</span></h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-16 max-w-2xl mx-auto lg:text-lg text-sm">Découvrez ce que disent les utilisateurs d'<strong className="dark:text-gray-100">EDU Dash</strong> — la solution tout-en-un pour une gestion scolaire fluide et moderne.</p>
+    <section id="témoignages" className="relative overflow-hidden bg-white py-16 lg:py-28 dark:bg-gray-900">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
+        {/* Header */}
+        <h2 className="mb-4 text-2xl font-bold text-gray-900 lg:text-4xl dark:text-gray-100">Témoignages & Avis</h2>
+        <p className="mx-auto max-w-2xl text-sm text-gray-600 lg:text-lg dark:text-gray-300">
+          Découvrez ce que disent les utilisateurs d’<strong className="dark:text-gray-100">EDU Dash</strong>.
+        </p>
 
-        <div  className="grid md:grid-cols-3 gap-10">
-          {testimonials.map((t, i) => (
-            <div key={i} className="relative bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-md border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300 text-left group">
-              <div className="absolute -top-8 left-8 z-99 w-16 h-16 rounded-full overflow-hidden shadow-lg border-4 border-white dark:border-gray-800 transition-transform duration-300 group-hover:-translate-y-1 z-10">
-                <img src={t.img} alt={t.name} className="w-full h-full object-cover" />
+        {/* Testimonials grid */}
+        <div className="mt-16 grid gap-8 md:grid-cols-3">
+          {testimonials.slice(0, 3).map((t, i) => (
+            <div
+              key={i}
+              className="group relative flex flex-col justify-between rounded-3xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+            >
+              {/* Stars */}
+              <div className="mb-4 flex gap-1">
+                {[...Array(5)].map((_, s) => (
+                  <span key={s} className="text-[#FFAA27] text-sm">★</span>
+                ))}
               </div>
 
-              <div className="mt-8">
-                <h4 className="font-semibold text-[#FFAA28]">{t.name}</h4>
-                <p className="text-sm text-gray-500 dark:text-gray-300 mb-4">{t.role}</p>
-                <p className="italic text-gray-700 dark:text-gray-200 leading-relaxed">“{t.quote}”</p>
-              </div>
+              {/* Quote */}
+              <p className="flex-1 text-base leading-relaxed text-gray-700">"{t.quote}"</p>
 
-              <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-[#FFAA28]/30 transition-all duration-300"></div>
+              {/* Divider */}
+              <div className="my-6 h-px bg-gray-100" />
+
+              {/* Author */}
+              <div className="flex items-center gap-3">
+                <div className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-sm font-semibold ${t.color}`}>
+                  {t.initials}
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-gray-900 text-left">{t.name}</p>
+                  <p className="text-xs text-gray-400 text-left">{t.role}</p>
+                  <p className="text-xs font-medium text-[#FFAA27]">{t.school}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -829,266 +1326,293 @@ export function Témoignages() {
 }
 
 export function ContactSection() {
-  const [contact, setContact] = useState({ name: "", email: "", message: "" });
+  const [contact, setContact] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState("idle");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [status, setStatus] = useState('idle');
+  const [errorMessage, setErrorMessage] = useState('');
   const [fieldErrors, setFieldErrors] = useState({});
+  const MESSAGE_LIMIT = 1000;
 
   const handleContactChange = (e) => {
     const { name, value } = e.target;
     setContact((s) => ({ ...s, [name]: value }));
+    setFieldErrors((s) => ({ ...s, [name]: '' }));
   };
+
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleContactSubmit = (e) => {
     e.preventDefault();
+    setStatus('idle');
+    setErrorMessage('');
+    const errors = {};
+    if (!contact.name.trim()) errors.name = 'Le nom est requis.';
+    if (!contact.email.trim()) errors.email = "L'email est requis.";
+    else if (!validateEmail(contact.email)) errors.email = "L'email fourni est invalide.";
+    if (!contact.message.trim()) errors.message = 'Le message est requis.';
+    else if (contact.message.length > MESSAGE_LIMIT) errors.message = `Le message dépasse la limite de ${MESSAGE_LIMIT} caractères.`;
+
+    if (Object.keys(errors).length) {
+      setFieldErrors(errors);
+      setStatus('error');
+      setErrorMessage('Veuillez corriger les champs indiqués.');
+      return;
+    }
+
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
-      setStatus("success");
-      setContact({ name: "", email: "", message: "" });
+      setStatus('success');
+      setContact({ name: '', email: '', message: '' });
+      setFieldErrors({});
     }, 700);
   };
 
   return (
-        <section id="contact" className="bg-white py-20">
-            <div className="mx-auto max-w-6xl px-6 md:px-10">
-                {/* Heading */}
-                <div className="mb-8 text-center lg:mb-14">
-                    <h2 className="mb-3 text-3xl font-bold text-gray-900 lg:text-4xl">
-                        Contactez <span className="">notre équipe</span>
-                    </h2>
-                    <div className="mx-auto mb-4 hidden h-1 w-24 rounded-full bg-[#FFAA27] lg:flex"></div>
-                    <p className="mx-auto max-w-2xl text-sm text-gray-600 lg:text-lg">
-                        Une question, un partenariat, ou un besoin d’assistance ? N’hésitez pas à nous écrire nous serons ravis de vous répondre.
-                    </p>
+    <section id="contact" className="bg-white py-20">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
+        {/* Heading */}
+        <div className="mb-8 text-center lg:mb-14">
+          <h2 className="mb-3 text-3xl font-bold text-gray-900 lg:text-4xl">
+            Contactez <span className="">notre équipe</span>
+          </h2>
+          <div className="mx-auto mb-4 hidden h-1 w-24 rounded-full bg-[#FFAA27] lg:flex"></div>
+          <p className="mx-auto max-w-2xl text-sm text-gray-600 lg:text-lg">
+            Une question, un partenariat, ou un besoin d’assistance ? N’hésitez pas à nous écrire nous serons ravis de vous répondre.
+          </p>
+        </div>
+
+        {/* Row Layout */}
+        <div className="flex flex-col gap-10 md:flex-row md:gap-16">
+          {/* Left: Contact Info */}
+          <div className="p-8 lg:flex-1">
+            <h3 className="mb-6 text-2xl font-semibold text-gray-900">Informations de contact</h3>
+
+            <ul className="space-y-6 text-gray-700">
+              <li className="flex items-start gap-4">
+                <div className="rounded-full bg-[#FFAA27]/10 p-3 text-[#FFAA27]">
+                  <Mail size={20} />
+                </div>
+                <div>
+                  <p className="font-semibold">E-mail</p>
+                  <p className="text-gray-600">edudashma@gmail.com</p>
+                </div>
+              </li>
+              <li className="flex items-start gap-4">
+                <div className="rounded-full bg-[#FFAA27]/10 p-3 text-[#FFAA27]">
+                  <MapPin size={20} />
+                </div>
+                <div>
+                  <p className="font-semibold">Adresse</p>
+                  <p className="text-gray-600">Casablanca, Maroc</p>
+                </div>
+              </li>
+              <li className="flex items-start gap-4">
+                <div className="rounded-full bg-[#FFAA27]/10 p-3 text-[#FFAA27]">
+                  <Phone size={20} />
+                </div>
+                <div>
+                  <p className="font-semibold">Téléphone</p>
+                  <p className="text-gray-600">+212 765 23 22 05</p>
+                </div>
+              </li>
+            </ul>
+
+            {/* Replace Social Section */}
+            {/* WhatsApp CTA */}
+            <div className="mt-8">
+              <a
+                href="https://wa.me/212765232205?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 rounded-2xl border border-green-200 bg-green-50 px-6 py-5 transition-all duration-300 hover:-translate-y-1 hover:border-green-300 hover:bg-green-100"
+              >
+                <div className="flex h-14 w-14 px-3 items-center justify-center rounded-xl bg-green-500 text-white shadow-md">
+                  <FaWhatsapp className="h-8 w-8" />
                 </div>
 
-                {/* Row Layout */}
-                <div className="flex flex-col gap-10 md:flex-row md:gap-16">
-                    {/* Left: Contact Info */}
-                    <div className="p-8 lg:flex-1">
-                        <h3 className="mb-6 text-2xl font-semibold text-gray-900">Informations de contact</h3>
+                <div>
+                  <p className="text-sm font-medium text-green-700">
+                    Réponse rapide
+                  </p>
 
-                        <ul className="space-y-6 text-gray-700">
-                            <li className="flex items-start gap-4">
-                                <div className="rounded-full bg-[#FFAA27]/10 p-3 text-[#FFAA27]">
-                                    <Mail size={20} />
-                                </div>
-                                <div>
-                                    <p className="font-semibold">E-mail</p>
-                                    <p className="text-gray-600">edudashma@gmail.com</p>
-                                </div>
-                            </li>
-                            <li className="flex items-start gap-4">
-                                <div className="rounded-full bg-[#FFAA27]/10 p-3 text-[#FFAA27]">
-                                    <MapPin size={20} />
-                                </div>
-                                <div>
-                                    <p className="font-semibold">Adresse</p>
-                                    <p className="text-gray-600">Casablanca, Maroc</p>
-                                </div>
-                            </li>
-                            <li className="flex items-start gap-4">
-                                <div className="rounded-full bg-[#FFAA27]/10 p-3 text-[#FFAA27]">
-                                    <Clock size={20} />
-                                </div>
-                                <div>
-                                    <p className="font-semibold">Horaires</p>
-                                    <p className="text-gray-600">Lun - Ven : 9h à 18h</p>
-                                </div>
-                            </li>
-                        </ul>
+                  <h4 className="text-xl font-bold text-gray-900">
+                    Demander une démo WhatsApp
+                  </h4>
 
-                        {/* Replace Social Section */}
-                        <div className="mt-10 border-t border-gray-100 pt-6">
-                            <h4 className="mb-3 text-lg font-semibold text-gray-900">Besoin d’aide rapide ?</h4>
-                            <p className="mb-4 text-sm text-gray-600">
-                                Vous pouvez également consulter notre centre d’aide ou contacter un responsable de votre établissement pour un
-                                accompagnement direct.
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Right: Contact Form */}
-                    <div className="flex-[1.3] bg-white px-4 lg:space-y-6 lg:p-8">
-                        <form onSubmit={handleContactSubmit} className="space-y-6">
-                            {/* Name */}
-                            <div>
-                                <label className="mb-2 block text-sm font-medium text-gray-800">Votre nom</label>
-                                <div className="relative">
-                                    <User size={18} className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400" />
-                                    <input
-                                        name="name"
-                                        value={contact.name}
-                                        onChange={handleContactChange}
-                                        placeholder="Jean Dupont"
-                                        required
-                                        className="w-full rounded-xl border border-gray-200 bg-white py-3 pr-3 pl-10 text-sm text-gray-700 placeholder-gray-400 transition focus:border-[#FFAA27] focus:ring-2 focus:ring-[#FFAA27]/40 focus:outline-none"
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Email */}
-                            <div>
-                                <label className="mb-2 block text-sm font-medium text-gray-800">E-mail</label>
-                                <div className="relative">
-                                    <Mail size={18} className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400" />
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={contact.email}
-                                        onChange={handleContactChange}
-                                        placeholder="email@example.com"
-                                        required
-                                        className="w-full rounded-xl border border-gray-200 bg-white py-3 pr-3 pl-10 text-sm text-gray-700 placeholder-gray-400 transition focus:border-[#FFAA27] focus:ring-2 focus:ring-[#FFAA27]/40 focus:outline-none"
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Message */}
-                            <div>
-                                <label className="mb-2 block text-sm font-medium text-gray-800">Message</label>
-                                <div className="relative">
-                                    <MessageSquare size={18} className="absolute top-4 left-3 text-gray-400" />
-                                    <textarea
-                                        name="message"
-                                        value={contact.message}
-                                        onChange={handleContactChange}
-                                        rows={5}
-                                        placeholder="Votre message..."
-                                        required
-                                        className="w-full resize-none rounded-xl border border-gray-200 bg-white py-3 pr-3 pl-10 text-sm text-gray-700 placeholder-gray-400 transition focus:border-[#FFAA27] focus:ring-2 focus:ring-[#FFAA27]/40 focus:outline-none"
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Submit */}
-                            <button
-                                type="submit"
-                                disabled={isSubmitting}
-                                className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#FFAA27] py-3 font-semibold text-white shadow-md transition hover:bg-orange-500 hover:shadow-lg"
-                            >
-                                {/* <Send size={18} /> */}
-                                {isSubmitting ? 'Envoi...' : 'Envoyer le message'}
-                            </button>
-                        </form>
-
-                        {/* Status */}
-                        {status === 'error' && (
-                            <p className="mt-2 rounded-lg border border-red-100 bg-red-50 p-2 text-sm text-red-500">{errorMessage}</p>
-                        )}
-                        {status === 'success' && (
-                            <p className="mt-2 rounded-lg border border-green-100 bg-green-50 p-2 text-sm text-green-600">
-                                Merci ! Votre message a été envoyé avec succès.
-                            </p>
-                        )}
-                    </div>
+                  <p className="text-sm text-gray-600">
+                    Échangez directement avec notre équipe
+                  </p>
                 </div>
+              </a>
             </div>
-        </section>
+          </div>
+
+          {/* Right: Business Card */}
+          <div className="flex-[1.3] flex items-center justify-center px-4 lg:p-8">
+            <div className="w-full max-w-lg">
+              <a
+                href={businessCardImage}
+                download="Carte-de-visite-Edu-Dash.png"
+                className="group block"
+              >
+                <div className="relative overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.12)] transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_30px_80px_rgba(0,0,0,0.18)]">
+                  {/* Business Card */}
+                  <img
+                    src={businessCardImage}
+                    alt="Carte de visite Edu Dash"
+                    className="w-full transition-transform duration-700 group-hover:scale-[1.03]"
+                  />
+
+                  {/* Overlay */}
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-white/80">
+                          Cliquez pour télécharger
+                        </p>
+
+                        {/* <h4 className="mt-1 text-lg font-semibold text-white">
+                                                    Carte de visite Edu Dash
+                                                </h4> */}
+                      </div>
+
+                      <div className="rounded-full bg-white/20 p-3 backdrop-blur-md transition group-hover:bg-[#FFAA27]">
+                        <Download className="h-5 w-5 text-white" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              {/* Small Note */}
+              <p className="mt-5 text-center text-sm text-gray-500">
+                Téléchargez notre carte de visite pour retrouver facilement nos coordonnées.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
 export function FinalCTA() {
-    return (
-    <section className="relative lg:block hidden py-20 bg-white dark:bg-gray-900">
-      <div className="max-w-5xl mx-auto px-6 text-center space-y-8">
-        <h2 className="lg:text-4xl text-3xl font-bold leading-tight text-gray-900 dark:text-gray-100">Prêt à moderniser la gestion de votre école ?</h2>
-        <p className="text-sm lg:text-lg max-w-2xl mx-auto text-gray-700 dark:text-gray-300">Rejoignez les établissements qui font déjà confiance à EDU Dash et découvrez une nouvelle façon de gérer votre école, simplement et efficacement.</p>
+  return (
+    <section className="relative hidden bg-white py-20 lg:block dark:bg-gray-900">
+      <div className="mx-auto max-w-5xl space-y-8 px-6 text-center">
+        <h2 className="text-3xl leading-tight font-bold text-gray-900 lg:text-4xl dark:text-gray-100">
+          Prêt à moderniser la gestion de votre école ?
+        </h2>
+        <p className="mx-auto max-w-2xl text-sm text-gray-700 lg:text-lg dark:text-gray-300">
+          Essayez EDU Dash et transformez la gestion de votre école dès aujourd’hui.
+        </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-          <a href="/login" className="px-8 py-3 rounded-xl text-white bg-[#FFAA28] hover:text-[#FFAA28] hover:bg-white transition-colors duration-300 border hover:border-[#FFAA28] font-semibold hover:bg-gray-100 transition dark:border-none shadow-lg">Se connecter</a>
-          <a href="#contact" className="px-8 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 text-black dark:text-gray-200 hover:bg-gray-900 dark:hover:bg-gray-700 hover:text-white dark:hover:text-white transition-colors duration-300 dark:bg-transparent border-2 border-white font-semibold">Nous contacter</a>
+        <div className="flex flex-col justify-center gap-4 pt-4 sm:flex-row">
+          <a
+            href="https://wa.me/212765232205?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl border border-green-500 px-6 py-3 font-medium text-green-600 transition hover:bg-green-50"
+          >
+            <FaWhatsapp className="h-5 w-5" />
+            Demander une démo WhatsApp
+          </a>
+          <a
+            href="#contact"
+            className="rounded-xl border-2 border-white bg-gray-50 px-8 py-3 font-semibold text-black transition-colors duration-300 hover:bg-gray-900 hover:text-white dark:bg-gray-800 dark:bg-transparent dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Nous contacter
+          </a>
         </div>
       </div>
     </section>
-    );
+  );
 }
 
 export function Footer() {
-    return (
-        <footer className="border-t border-gray-200 bg-white py-16 text-black">
-            <div className="mx-auto flex max-w-7xl flex-col justify-between gap-12 px-6 md:flex-row md:px-12">
-                {/* Logo & Description */}
-                <div className="flex-1 md:flex-none">
-                    <img src={logo} alt="EduDash Logo" className="mb-4 h-12" />
-                    <p className="max-w-sm text-sm leading-relaxed text-gray-600">
-                        EduDash est une plateforme de gestion scolaire intuitive et complète pour moderniser la vie éducative.
-                    </p>
-                </div>
+  return (
+    <footer className="border-t border-gray-200 bg-white py-16 text-black">
+      <div className="mx-auto flex max-w-7xl flex-col justify-between gap-12 px-6 md:flex-row md:px-12">
+        {/* Logo & Description */}
+        <div className="flex-1 md:flex-none">
+          <img src={logo} alt="EduDash Logo" className="mb-4 h-12" />
+          <p className="max-w-sm text-sm leading-relaxed text-gray-600">
+            EduDash est une plateforme de gestion scolaire intuitive et complète pour moderniser la vie éducative.
+          </p>
+        </div>
 
-                {/* Useful Links */}
-                <div className="flex-1">
-                    <h3 className="mb-4 text-lg font-semibold">Liens utiles</h3>
-                    <ul className="space-y-2 text-sm">
-                        <li>
-                            <a href="#accueil" className="transition-colors duration-300 hover:text-[#FFAA27]">
-                                Accueil
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#apropos" className="transition-colors duration-300 hover:text-[#FFAA27]">
-                                À propos
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#fonctionnalites" className="transition-colors duration-300 hover:text-[#FFAA27]">
-                                Fonctionnalités
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/soon" className="transition-colors duration-300 hover:text-[#FFAA27]">
-                                Démo
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#contact" className="transition-colors duration-300 hover:text-[#FFAA27]">
-                                Contact
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+        {/* Useful Links */}
+        <div className="flex-1">
+          <h3 className="mb-4 text-lg font-semibold">Liens utiles</h3>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <a href="#accueil" className="transition-colors duration-300 hover:text-[#FFAA27]">
+                Accueil
+              </a>
+            </li>
+            <li>
+              <a href="#apropos" className="transition-colors duration-300 hover:text-[#FFAA27]">
+                À propos
+              </a>
+            </li>
+            <li>
+              <a href="#fonctionnalites" className="transition-colors duration-300 hover:text-[#FFAA27]">
+                Fonctionnalités
+              </a>
+            </li>
+            <li>
+              <a href="/soon" className="transition-colors duration-300 hover:text-[#FFAA27]">
+                Démo
+              </a>
+            </li>
+            <li>
+              <a href="#contact" className="transition-colors duration-300 hover:text-[#FFAA27]">
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
 
-                {/* Contact / Newsletter */}
-                <div className="flex-1">
-                    <h3 className="mb-4 text-lg font-semibold">Contactez-nous</h3>
-                    <ul className="space-y-2 text-sm text-gray-600">
-                        <li>
-                            Email :{' '}
-                            <a href="mailto:contact@edudash.com" className="transition-colors hover:text-[#FFAA27]">
-                                contact@edudash.com
-                            </a>
-                        </li>
-                        <li className="flex gap-1">
-                            <p>Localisation :</p>
-                            <p className="transition-colors hover:text-[#FFAA27]"> Casablanca , Maroc</p>
-                        </li>
-                    </ul>
+        {/* Contact / Newsletter */}
+        <div className="flex-1">
+          <h3 className="mb-4 text-lg font-semibold">Contactez-nous</h3>
+          <ul className="space-y-2 text-sm text-gray-600">
+            <li>
+              Email :{' '}
+              <a href="mailto:contact@edudash.com" className="transition-colors hover:text-[#FFAA27]">
+                contact@edudash.com
+              </a>
+            </li>
+            <li className="flex gap-1">
+              <p>Localisation :</p>
+              <p className="transition-colors hover:text-[#FFAA27]"> Casablanca , Maroc</p>
+            </li>
+          </ul>
 
-                    <h3 className="mt-6 mb-2 text-lg font-semibold">Newsletter</h3>
-                    <form className="flex flex-col gap-2 sm:flex-row">
-                        <input
-                            type="email"
-                            placeholder="Votre email"
-                            className="rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-[#FFAA27] focus:outline-none"
-                        />
-                        <button
-                            type="submit"
-                            className="hover:bg-primary-dark rounded-md bg-[#FFAA27] px-4 py-2 font-medium text-white transition-colors"
-                        >
-                            S'inscrire
-                        </button>
-                    </form>
-                </div>
-            </div>
+          <h3 className="mt-6 mb-2 text-lg font-semibold">Newsletter</h3>
+          <form className="mt-2 flex overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+            <input
+              type="email"
+              placeholder="Votre email"
+              className="flex-1 min-w-0 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:outline-none"
+            />
+            <button
+              type="submit"
+              className="flex-shrink-0 bg-[#FFAA27] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-500"
+            >
+              S'inscrire
+            </button>
+          </form>
+        </div>
+      </div>
 
-            {/* Bottom Copyright */}
-            <div className="mt-12 border-t border-gray-100 pt-6 text-center text-sm text-gray-500">
-                © {new Date().getFullYear()} EduDash. Tous droits réservés.
-            </div>
-        </footer>
-    );
+      {/* Bottom Copyright */}
+      <div className="mt-12 border-t border-gray-100 pt-6 text-center text-sm text-gray-500">
+        © {new Date().getFullYear()} EduDash. Tous droits réservés.
+      </div>
+    </footer>
+  );
 }
 
 /* ================= PAGE ================= */
@@ -1097,8 +1621,12 @@ export default function Accueil() {
     <div style={{ fontFamily: "'Poppins', sans-serif" }}>
       <NavBar />
       <HeroSection />
+      <StatsSection />
       <PourquoiEduDash />
+      <HowItWorksSection />
+      <ProductPreview />
       <WhoItsFor />
+      <ComparisonSection />
       <TrustSection />
       {/* <StatistiquesHome /> */}
       <Témoignages />
