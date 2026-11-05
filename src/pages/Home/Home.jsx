@@ -336,7 +336,7 @@ export function HeroSection() {
 
   {/* SECONDARY CTA (muted green, not loud) */}
   <a
-    href="https://wa.me/212765232205?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
+    href="https://wa.me/212604800799?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
     target="_blank"
     rel="noopener noreferrer"
     className="flex-1 flex items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-green-500 bg-white px-4 py-3 font-medium text-green-500 transition hover:bg-gray-50"
@@ -418,7 +418,7 @@ export function StatsSection() {
 
     <div className="flex-1">
       <div className="text-sm font-medium text-gray-900">
-        Solution 100% adaptée aux établissements scolaires
+        Solution 100% adaptée aux établissements scolaires marocains
       </div>
 
       <div className="text-xs text-gray-500 mt-1">
@@ -746,7 +746,7 @@ export function ProductPreview() {
           <div className="mt-0 flex flex-col justify-center gap-4 sm:flex-row md:mt-8">
             <button>
               <a
-                href="https://wa.me/212765232205?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
+                href="https://wa.me/212604800799?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-xl text-white bg-green-500 px-6 py-3 font-medium transition hover:bg-green-600 "
@@ -1521,7 +1521,7 @@ export function ContactSection() {
         {/* Mobile: WhatsApp first, then email, then address */}
         <div className="flex flex-col gap-4 md:hidden">
           <a
-            href="https://wa.me/212765232205?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
+            href="https://wa.me/212604800799?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center gap-4 rounded-2xl border border-green-200 bg-green-50 px-5 py-5 transition-all duration-300 hover:border-green-300 hover:bg-green-100"
@@ -1627,7 +1627,7 @@ export function ContactSection() {
 
             <div className="mt-8">
               <a
-                href="https://wa.me/212765232205?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
+                href="https://wa.me/212604800799?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-4 rounded-2xl border border-green-200 bg-green-50 px-6 py-5 transition-all duration-300 hover:-translate-y-1 hover:border-green-300 hover:bg-green-100"
@@ -1697,7 +1697,7 @@ export function FinalCTA() {
 
         <div className="flex flex-col justify-center gap-4 pt-4 sm:flex-row">
           <a
-            href="https://wa.me/212765232205?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
+            href="https://wa.me/212604800799?text=Bonjour%20Edu%20Dash,%20je%20souhaite%20demander%20une%20d%C3%A9monstration."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-xl border border-green-500 px-6 py-3 font-medium text-green-600 transition hover:bg-green-50"
